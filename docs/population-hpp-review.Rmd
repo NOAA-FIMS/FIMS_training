@@ -1,0 +1,212 @@
+---
+title:  "population.hpp review"
+author: "Andrea Havron<br>NOAA Fisheries, OST"
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: ["xaringan-themer.css", "slides-style.css"]
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc( (%current% - 1) / (%total% - 1) * 100%);">
+          </div>
+        </div>`
+---
+layout: true
+
+.footnote[U.S. Department of Commerce | National Oceanic and Atmospheric Administration | National Marine Fisheries Service]
+
+
+<style type="text/css">
+
+code.cpp{
+  font-size: 14px;
+}
+code.r{
+  font-size: 14px;
+}
+
+
+</style>
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+# this gives you a tile navigation if you type "O" at any time
+xaringanExtra::use_tile_view()
+```
+
+---
+# C++ Anatomy of a Class
+
+```cpp
+class ClassName{
+  Access specifier: //can be private, public, or protected
+  Data members; //variables to be used
+  
+  ClassName(){} //Constructor - automatically called when new object created
+  
+  Member functions(){} //Methods to access data members
+  
+}; //class name ends with semicolon
+
+
+// create pointer to new class object
+ClassName<T>* ClassName<T>::instance = new ClassName<T>();
+// or declare new class object
+ClassName<T> myclass;
+```
+- Memory is not allocated when a class is defined
+- An instance of the class needs to be created for memory allocation (new object created)
+- **new** is the C++ initialize function that allocates memory
+- Class members can be accessed using the dot('.') if using an object or arrow('->') if using a pointer
+<br><br>
+Resources:<br>
+[**geeksforgeeks**](https://www.geeksforgeeks.org/c-classes-and-objects/)<br>
+[**cplusplus**](https://cplusplus.com/doc/tutorial/classes/)
+---
+# Class Example
+
+C++ code
+.pull-left[
+```{Rcpp, eval = FALSE}
+#include <iostream>
+
+template <class T>
+class MyClass{
+    public:
+    T a;
+    T b;
+    MyClass(){}
+    T evaluate(){
+        return a + b;
+    }
+};
+int main() {
+  //initiate class
+  MyClass<double> *m = new MyClass<double>();
+  m -> a = 1.2;
+  m -> b = 3.4;
+  std::cout << m -> evaluate() << std::endl;  
+  //intiate class
+  MyClass<double> myclass;
+  myclass.a = 2;
+  myclass.b = 3;
+  std::cout << myclass.evaluate() << std::endl;
+  return 0;
+}
+```
+]
+.pull-right[
+Console output
+```{r, eval = FALSE}
+g++ classexample.cpp -o a.exe
+a.exe
+
+4.6
+5
+```
+]
+---
+# population.hpp
+```cpp
+template <typename Type>
+  struct Population : public FIMSObject<Type>{
+  
+  //Data members: variables to be used
+  static uint32_t id_g; /*!< reference id for population object*/
+  size_t nyears; /*!< total number of years in the fishery*/
+  ...
+  // constants
+  // parameters
+  // Transformed values
+  // derived quantities
+  
+  /// recruitment
+    int recruitment_id = -999;                                /*!< id of recruitment model object*/
+    std::shared_ptr<fims::RecruitmentBase<Type>> recruitment; /*!< shared pointer to recruitment module */
+
+  Population()
+  {
+    this->id = Population::id_g++;
+  }
+  
+  Member functions(){} //Methods to access data members
+  
+}; //class name ends with semicolon
+
+template <class Type>
+uint32_t Population<Type>::id_g = 0;
+
+```
+---
+# Member Functions
+
+```cpp
+
+    /**
+     * @brief Initialize values. Called once at the start of model run.
+     *
+     * @param nyears total number of years in the fishery
+     * @param nseasons total number of seasons in the fishery
+     * @param nages total number of ages in the population
+     */
+    void Initialize(int nyears, int nseasons, int nages){...}
+    
+   /**
+     * @brief Prepare to run the population loop. Called at each model itartion, and used
+     *  to zero out derived quantities, values that were summed, etc.
+     *
+     */
+    void Prepare(){...}
+    
+    void CalculateMaturityAA(int index_ya, int age)
+    {
+      // this->maturity is pointing to the maturity module, which has
+      //  an evaluate function. -> can be nested.
+      this->proportion_mature_at_age[index_ya] =
+          this->maturity->evaluate(age);
+    }
+```
+---
+# Additional Member Functions
+
+<br>
+```cpp
+CalculateInitialNumbersAA(...){...}
+
+CalculateMortality(...){...}
+
+CalculateNumbersAA(...){...}
+
+CalculateUnfishedNumbersAA(...){...}
+
+CalculateSpawningBiomass(...){...}
+
+CalculateUnfishedSpawningBiomass(...){...}
+
+CalculateRecruitment(...){...}
+
+CalculateCatch(...){...}
+
+CalculateIndex(...){...}
+
+CalculateCatchNumbersAA(...){...}
+
+CalculateCatchWeightAA(...){...}
+
+Evaluate(...){...}
+```
+---
+class: middle
+
+[github.com/FIMS/180-feat-population/inst/include/population_dynamics/population/](https://github.com/NOAA-FIMS/FIMS/blob/180-feat-population/inst/include/population_dynamics/population/population.hpp)
+
