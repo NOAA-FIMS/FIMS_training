@@ -1,0 +1,443 @@
+---
+title: "C++ Resources"
+author: "Andrea Havron<br>Christine Stawitz<br>NOAA Fisheries, OST"
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: ["xaringan-themer.css", "slides-style.css"]
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc( (%current% - 1) / (%total% - 1) * 100%);">
+          </div>
+        </div>`
+---
+layout: true
+
+.footnote[U.S. Department of Commerce | National Oceanic and Atmospheric Administration | National Marine Fisheries Service]
+
+
+<style type="text/css">
+
+code.cpp{
+  font-size: 14px;
+}
+code.r{
+  font-size: 14px;
+}
+
+
+</style>
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+# this gives you a tile navigation if you type "O" at any time
+xaringanExtra::use_tile_view()
+```
+
+---
+# C++ and Memory
+
+
+.column-60[
+C++ code
+```{Rcpp, eval = FALSE}
+#include <iostream>
+
+int main() {
+  //initiate a variable
+  float a = 3.1459;
+  //initiate a new variable with the same value as a
+  float b = a;
+  //initiate a variable c that points to the same address as a
+  float* c = &a;
+  std::cout << "c is equal to the address of a; *c = a" << std::endl;
+  std::cout << "c = " << c << std::endl;
+  std::cout << "a = " << a << "; *c = " << *c << std::endl;
+  return 0;
+}
+```
+]
+
+.column-40-left[
+Console output
+```{r, eval = FALSE}
+g++ memoryexample.cpp -o a.exe
+a.exe
+
+c is equal to the address of a; *c = a
+c = 0x78fe14
+a = 3.1459; *c = 3.1459
+```
+]
+
+---
+# C++ and Memory
+
+.column-60[
+C++ code
+```{Rcpp, eval = FALSE}
+#include <iostream>
+
+int main() {
+  //initiate a variable
+  float a = 3.1459;
+  //initiate a new variable with the same value as a
+  float b = a;
+  //initiate a variable c that points to the same address as a
+  float* c = &a;
+  *c = 100;
+  std::cout << "a and *c have been updated; b has not"  << std::endl;
+  std::cout << "a = " << a << "; *c = " << *c << std::endl;
+  std::cout << "b = " << b << std::endl;
+  return 0;
+}
+```
+]
+
+.column-40-left[
+Console output
+```{r, eval = FALSE}
+g++ memoryexample.cpp -o a.exe
+a.exe
+
+a and *c have been updated; b has not
+a = 100; *c = 100
+b = 3.1459
+```
+]
+---
+# C++ and Memory
+
+.column-60[
+C++ code
+```{Rcpp, eval = FALSE}
+#include <iostream>
+
+int main() {
+  //initiate a variable
+  float a = 3.1459;
+  //initiate a new variable with the same value as a
+  float b = a;
+  //initiate a variable c that points to the same address as a
+  float* c = &a;
+  *c = 100;
+  c = &b;
+  b = 10;
+  a = 3;
+  std::cout << "c now equals the address of b" << std::endl;
+  std::cout << "c = " << c << "; &b = " << &b << std::endl;
+  std::cout << "a = " << a << std::endl;
+  std::cout << "b = " << b << std::endl; 
+  std::cout << "*c = " << *c ;
+  return 0;
+}
+```
+]
+
+.column-40-left[
+Console output
+```{r, eval = FALSE}
+g++ memoryexample.cpp -o a.exe
+a.exe
+
+c now equals the address of b
+c = 0x78fe10; &b = 0x78fe10
+a = 3
+b = 10
+ *c = 10
+```
+]
+---
+# C++ Templates
+
+.column-60[
+C++ code
+```{Rcpp, eval = FALSE}
+#include <iostream>
+#include <cmath>
+
+template <class T>
+  T my_add(T *x, T y){
+    *x += y;
+    return 0;
+}
+template <class T>
+  T my_exp(T *x){
+    *x = std::exp(*x);
+    return 0;
+}
+int main() {
+  //initiate a variable
+  float par = 0;
+  //initiate a new constant used to update par
+  float b = 0.6931472;
+  //intiate a pointer to par
+  float *c = &par;
+  //update par using functions
+  my_add(c, b);
+  std::cout << "par = " << par << std::endl;
+  my_exp(c);
+  std::cout << "par = " << par << std::endl;
+  return 0;
+}
+```
+]
+
+.column-40-left[
+Console output
+```{r, eval = FALSE}
+g++ pointerexample.cpp -o a.exe
+a.exe
+
+par = 0.6931472
+par = 2
+```
+]
+
+---
+# C++ Anatomy of a Class
+.column-60[
+```cpp
+class ClassName{
+  //Access specifier: can be private, public, or protected
+  public:
+  //Data members: variables to be used
+  float a;
+  float b;
+  
+  ClassName(){} //Constructor - automatically called when new object created
+  
+  //Member functions: Methods to access data members
+  my_add(){
+    return a + b;
+  }
+  
+}; //class name ends with semicolon
+
+
+//create instance of class
+ClassName m();
+ClassName *m = new ClassName();
+
+std::make_shared m //used in FIMS to create shared pointers to FIMS classes
+```
+<br>
+resources:<br>
+[**geeksforgeeks**](https://www.geeksforgeeks.org/c-classes-and-objects/)<br>
+[**cplusplus**](https://cplusplus.com/doc/tutorial/classes/)
+]
+
+.column-40-left[
+- Memory is not allocated when a class is defined
+- An instance of the class needs to be created for memory allocation (new object created)
+- **new** is the C++ initialize function that allocates memory (creates pointer)
+- Classes can also be initialized as a declaration
+- Once the class is instantiated, members can be accessed using
+ - the dot(**.**) when class is declared
+ - the pointer(**->**) when an instance of the class is created using **new**
+ ]
+
+
+---
+# Class Example using templates
+
+C++ code
+.pull-left[
+```{Rcpp, eval = FALSE}
+#include <iostream>
+
+template <class T>
+class MyClass{
+    public:
+    T a;
+    T b;
+    MyClass(){}
+    T evaluate(){
+        return a + b;
+    }
+};
+int main() {
+  //initiate class with pointer
+  MyClass<double> *m = new MyClass<double>();
+  m -> a = 1.2;
+  m -> b = 3.4;
+  std::cout << m -> evaluate() << std::endl;  
+  //intiate class with declaration
+  MyClass<double> myclass;
+  myclass.a = 2;
+  myclass.b = 3;
+  std::cout << myclass.evaluate() << std::endl;
+  return 0;
+}
+```
+]
+.pull-right[
+Console output
+```{r, eval = FALSE}
+g++ classexample.cpp -o a.exe
+a.exe
+
+4.6
+5
+```
+]
+---
+class: middle
+
+# Rcpp Interface
+<br>
+### Sources
+- "Advanced `R`"  by Hadley Wickham (http://adv-r.had.co.nz/Rcpp.html)
+- "`Rcpp`: Seamless `R` and `C++` integration" by Dirk Eddelbuttel and Romain Francois, Journal of Statistical Software (https://www.jstatsoft.org/article/view/v040i08)
+- "`Rcpp` for everyone" by Masaki E. Tsuda (https://teuder.github.io/rcpp4everyone_en/)
+- "`Rcpp` Modules" vignette by Eddelbuttel and Francois (https://cran.rstudio.com/web/packages/Rcpp/vignettes/Rcpp-modules.pdf)
+
+---
+
+# What is `RCpp` and why should I care?
+
+.bluebox[## Definition
+"The `RCpp` package provides a consistent API for seamlessly accessing, extending or modifying R objects at the C++ level" - Eddelbuttel and Francois.
+]
+
+.yellowbox[## API
+a set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service.]
+
+* One of the most widely used `R` extensions (over 1000 packages)
+* With very minimal knowledge of `C++` you can speed up function runs A LOT
+- The most efficient `R` functions are written in `C++` and called from `R`
+
+
+---
+# Writing `C++` functions in `R`
+
+* You can write `C++` functions inline in your R code using `cppFunction`
+* You can also compile single lines of code directly using `evalCpp`
+
+In R script or console:
+```{r}
+library(Rcpp)
+cppFunction('int add(int x, int y, int z) {
+  int sum = x + y + z;
+  return sum;
+}')
+# add works like a regular R function
+add
+add(1, 2, 3)
+evalCpp("std::numeric_limits<double>::max()")
+```
+
+---
+# Calling `C++` from `R`
+
+.pull-left[
+mean.cpp
+```{Rcpp}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+double meanC(NumericVector x) {
+  int n = x.size();
+  double total = 0;
+
+  for(int i = 0; i < n; ++i) {
+    total += x[i];
+  }
+  return total / n;
+}
+
+```
+]
+
+.pull-right[
+* `#include <Rcpp.h>` allows you to call `Rcpp` syntax in the file. You can omit `using namespace Rcpp` if you use `::` i.e. `Rcpp::NumericVector` 
+* `// [[Rcpp::export]]` - put this above any function you want to make available in `R`
+* `NumericVector, .size()` useful type, function implemented in `Rcpp`]
+
+---
+# Calling `C++` from `R`
+.pull-left[
+```{r eval=FALSE}
+sourceCpp("mean.cpp")
+```
+
+
+```{r}
+library(microbenchmark)
+x <- runif(1e5)
+microbenchmark(
+  mean(x),
+  meanC(x)
+)
+
+```
+]
+
+
+.pull-right[
+* `sourceCpp` compiles the file
+* More `Rcpp` syntax [here](https://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf)
+]
+
+---
+
+# Typing and methods
+.pull-left-narrow[
+- Scalar classes
+* `int`
+* `double`
+* `bool`
+* `String`
+- vector classes
+* `IntegerVector`
+* `NumericVector`
+* `LogicalVector`
+* `CharacterVector`
+]
+
+.pull-right-wide[
+- Vector classes have useful static methods (called with `::` on class) 
+  ```{Rcpp eval=FALSE}
+   NumericVector v = NumericVector::create(1,2,3);
+  NumericVector::get_NA(); 
+  ```
+- Member functions or methods (called with `.` on object)
+  ```{Rcpp eval=FALSE} 
+  v.size(); 
+  v.push_back(4);
+  ```
+  operate on object `v`
+]
+
+---
+# `Rcpp` modules
+
+
+```{Rcpp eval=FALSE}
+RCPP_MODULE(unif_module) {
+class_<Uniform>("Uniform")
+.constructor<double,double>()
+.field("min", &Uniform::min, "minimum value")
+.field("max", &Uniform::max, "maximum value")
+.method("draw", &Uniform::draw)
+;
+}
+```
+
+* You can expose these using the `Rcpp` macro `RCPP_MODULE`
+* the `class_<Uniform>` constructor argument is what we will call the class from `R`
+* `.field`, `.constructor`, `.method`, `.property` 
+* `.field` can be used with two or three arguments
+* `.field_readonly` prevents it from being modified from `R` 
+
