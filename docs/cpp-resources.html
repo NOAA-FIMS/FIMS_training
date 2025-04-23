@@ -1154,6 +1154,153 @@ a.exe
 ```
 ]
 ---
+# C++ Polymorphism
+
+ - a function or operator works different when used in different context
+ - virtual: C++ function that gets overridden at runtime
+ - void: a C++ function with no return value
+ 
+&lt;br&gt;
+
+ .three-column-left[
+```cpp
+//include &lt;iostream&gt;
+
+class Shape {
+public:
+  Shape();
+  // Virtual function to calculate area
+  virtual double area() {
+    return 0.0; 
+  }
+};
+```
+ &lt;br&gt;
+resources: &lt;br&gt;
+[**geeksforgeeks**](https://www.geeksforgeeks.org/cpp-polymorphism/)&lt;br&gt;
+[**cplusplus.com**](https://cplusplus.com/forum/general/275978/)
+ ]
+
+ .three-column-left[
+```cpp
+class Circle : public Shape {
+private:
+  double radius;
+
+public:
+  Circle(double r):Shape(){radius = r}
+
+  // Override area() for Circle
+  double area() {
+    return M_PI * radius * radius;
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Rectangle : public Shape {
+private:
+  double width, height;
+
+public:
+  Rectangle(double w, double h):Shape(){
+  width = w;
+  height = h;
+}
+
+  // Override area() for Rectangle
+  double area()  {
+    return width * height;
+  }
+};
+```
+ ]
+---
+# C++ Polymorphism
+
+ .three-column-left[
+```cpp
+//include &lt;iostream&gt;
+
+class Shape {
+public:
+  Shape();
+  // Virtual function to calculate area
+  virtual double area() {
+    return 0.0; 
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Circle : public Shape {
+private:
+  double radius;
+
+public:
+  Circle(double r):Shape(){radius = r}
+
+  // Override area() for Circle
+  double area() {
+    return M_PI * radius * radius;
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Rectangle : public Shape {
+private:
+  double width, height;
+
+public:
+  Rectangle(double w, double h):Shape(){
+  width = w;
+  height = h;
+}
+
+  // Override area() for Rectangle
+  double area()  {
+    return width * height;
+  }
+};
+```
+ ]
+ 
+ &lt;br&gt;
+
+.pull-left[
+```cpp
+int main()
+{
+Shape *a;
+a = new Rectangle(4,5);
+std::cout&lt;&lt;a-&gt;area()&lt;&lt;endl;
+
+a = new Circle (2.4);
+std::cout&lt;&lt;a-&gt;area()&lt;&lt;endl;
+return 0;
+}
+```
+]
+.pull-right[
+Console output
+
+``` r
+g++ shape.cpp -o a.exe
+a.exe
+
+20
+18.09557
+```
+]
+ 
+---
 class: middle
 
 # Rcpp Interface
@@ -1200,7 +1347,7 @@ add
 
 ```
 ## function (x, y, z) 
-## .Call(&lt;pointer: 0x7e109ab654d0&gt;, x, y, z)
+## .Call(&lt;pointer: 0x72b937c3d4d0&gt;, x, y, z)
 ```
 
 ``` r
@@ -1269,9 +1416,9 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##      expr     min      lq     mean   median      uq      max neval
-##   mean(x) 354.381 390.514 404.0938 403.8835 425.584  482.350   100
-##  meanC(x)  87.473  87.784 106.6462  90.0030  95.258 1549.491   100
+##      expr     min       lq     mean   median      uq      max neval
+##   mean(x) 379.578 387.2525 458.8648 403.6835 436.299 1790.322   100
+##  meanC(x)  94.977  98.0180 113.1305  99.9015 102.161 1082.601   100
 ```
 ]
 

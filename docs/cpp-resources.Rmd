@@ -292,6 +292,152 @@ a.exe
 ```
 ]
 ---
+# C++ Polymorphism
+
+ - a function or operator works different when used in different context
+ - virtual: C++ function that gets overridden at runtime
+ - void: a C++ function with no return value
+ 
+<br>
+
+ .three-column-left[
+```cpp
+//include <iostream>
+
+class Shape {
+public:
+  Shape();
+  // Virtual function to calculate area
+  virtual double area() {
+    return 0.0; 
+  }
+};
+```
+ <br>
+resources: <br>
+[**geeksforgeeks**](https://www.geeksforgeeks.org/cpp-polymorphism/)<br>
+[**cplusplus.com**](https://cplusplus.com/forum/general/275978/)
+ ]
+
+ .three-column-left[
+```cpp
+class Circle : public Shape {
+private:
+  double radius;
+
+public:
+  Circle(double r):Shape(){radius = r}
+
+  // Override area() for Circle
+  double area() {
+    return M_PI * radius * radius;
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Rectangle : public Shape {
+private:
+  double width, height;
+
+public:
+  Rectangle(double w, double h):Shape(){
+  width = w;
+  height = h;
+}
+
+  // Override area() for Rectangle
+  double area()  {
+    return width * height;
+  }
+};
+```
+ ]
+---
+# C++ Polymorphism
+
+ .three-column-left[
+```cpp
+//include <iostream>
+
+class Shape {
+public:
+  Shape();
+  // Virtual function to calculate area
+  virtual double area() {
+    return 0.0; 
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Circle : public Shape {
+private:
+  double radius;
+
+public:
+  Circle(double r):Shape(){radius = r}
+
+  // Override area() for Circle
+  double area() {
+    return M_PI * radius * radius;
+  }
+};
+```
+ ]
+
+ .three-column-left[
+```cpp
+class Rectangle : public Shape {
+private:
+  double width, height;
+
+public:
+  Rectangle(double w, double h):Shape(){
+  width = w;
+  height = h;
+}
+
+  // Override area() for Rectangle
+  double area()  {
+    return width * height;
+  }
+};
+```
+ ]
+ 
+ <br>
+
+.pull-left[
+```cpp
+int main()
+{
+Shape *a;
+a = new Rectangle(4,5);
+std::cout<<a->area()<<endl;
+
+a = new Circle (2.4);
+std::cout<<a->area()<<endl;
+return 0;
+}
+```
+]
+.pull-right[
+Console output
+```{r, eval = FALSE}
+g++ shape.cpp -o a.exe
+a.exe
+
+20
+18.09557
+```
+]
+ 
+---
 class: middle
 
 # Rcpp Interface
