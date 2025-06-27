@@ -366,3 +366,18 @@ div.my-footer a {
   flex-direction: column;
   flex-wrap: wrap;
 }
+
+
+.rchunk {
+  border: solid #2e75b6;
+  background: solid ##d3d3d3;
+}
+.rcppchunk {
+  border: solid #c55a11;
+}
+.fimschunk {
+  border: solid #548235;
+}
+.infochunk {
+  border: solid #262626;
+}
