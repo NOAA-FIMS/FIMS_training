@@ -24,13 +24,15 @@ library(Rcpp)
   - The operator `*` can also be used to access the value the pointer points to, e.g. `*x` 
   
 ```{r def-reference}
-cppFunction('int reference() {
+cppFunction('
+#include <Rcpp.h> 
+int reference() {
   int y = 3;
   int &x = y;
-  std::cout << "x is: " << x << std::endl;
-  std::cout << "y is: " << y << std::endl;
-  std::cout << "The memory address of x is: " << &x << std::endl;
-  std::cout << "The memory address of y is: " << &y << std::endl;
+  Rcpp::Rcout << "x is: " << x << std::endl;
+  Rcpp::Rcout << "y is: " << y << std::endl;
+  Rcpp::Rcout << "The memory address of x is: " << &x << std::endl;
+  Rcpp::Rcout << "The memory address of y is: " << &y << std::endl;
   
   return 0;
 }')
@@ -38,14 +40,16 @@ cppFunction('int reference() {
 
 
 ```{r def-pointer}
-cppFunction('int pointer(){
+cppFunction('
+#include <Rcpp.h> 
+int pointer(){
   float y = 3.1459;
   //initiate a variable x that points to the same address as y
   float* x = &y;
-  std::cout << "x is equal to the address of y" << std::endl;
-  std::cout << "x is: " << x << std::endl;
-  std::cout <<  "The address of y is: " << &y << std::endl;
-  std::cout << "*x returns the value of y: " << *x <<  std::endl;
+  Rcpp::Rcout << "x is equal to the address of y" << std::endl;
+  Rcpp::Rcout << "x is: " << x << std::endl;
+  Rcpp::Rcout <<  "The address of y is: " << &y << std::endl;
+  Rcpp::Rcout << "*x returns the value of y: " << *x <<  std::endl;
   return 0;
 }')
 
@@ -56,7 +60,9 @@ pointer()
 
 We can use pointers to update values. In the following example, `b` is a copy while `c` is a pointer, which is why `b` does not get updated when `*c` is updated. We avoid copies in FIMS because when a variable gets updated in the model, we want it updated everywhere in the model.
 ```{r pointer-update}
-cppFunction('int update_pointer(){
+cppFunction('
+#include <Rcpp.h> 
+int update_pointer(){
  //initiate a variable
   float a = 3.1459;
   //initiate a new variable with the same value as a
@@ -64,9 +70,9 @@ cppFunction('int update_pointer(){
   //initiate a variable c that points to the same address as a
   float* c = &a;
   *c = 100;
-  std::cout << "a and *c have been updated; b has not"  << std::endl;
-  std::cout << "a = " << a << "; *c = " << *c << std::endl;
-  std::cout << "b = " << b << std::endl;
+  Rcpp::Rcout << "a and *c have been updated; b has not"  << std::endl;
+  Rcpp::Rcout << "a = " << a << "; *c = " << *c << std::endl;
+  Rcpp::Rcout << "b = " << b << std::endl;
   return 0;
 }')
 
@@ -75,7 +81,9 @@ update_pointer()
 
 We can reassign pointers using the `&` operator. What do you expect `a` and *c` to return in the following example?
 ```{r reassign-pointer}
-cppFunction('int reassign_pointer(){
+cppFunction('
+#include <Rcpp.h> 
+int reassign_pointer(){
 //initiate a variable
   float a = 3.1459;
   //initiate a new variable with the same value as a
@@ -85,13 +93,13 @@ cppFunction('int reassign_pointer(){
   *c = 100;
   c = &b;
   b = 10;
-  std::cout << "c now equals the address of b" << std::endl;
-  std::cout << "&a = " << &a << std::endl;
-  std::cout << "&b = " << &b << std::endl;
-  std::cout << "c = " << c << std::endl; 
-  std::cout << "a = " << a << std::endl;
-  std::cout << "b = " << b << std::endl; 
-  std::cout << "*c = " << *c <<std::endl;
+  Rcpp::Rcout << "c now equals the address of b" << std::endl;
+  Rcpp::Rcout << "&a = " << &a << std::endl;
+  Rcpp::Rcout << "&b = " << &b << std::endl;
+  Rcpp::Rcout << "c = " << c << std::endl; 
+  Rcpp::Rcout << "a = " << a << std::endl;
+  Rcpp::Rcout << "b = " << b << std::endl; 
+  Rcpp::Rcout << "*c = " << *c <<std::endl;
   return 0;
 }')
 
@@ -103,11 +111,13 @@ reassign_pointer()
 When pointers are initialized inline, e.g. `int x = 3; int* y = x`, the compiler automatically creates and manages memory for you. The user can also create and manage memory themselves using the `new` and `delete` commands. Care must be taken to manage memory properly. If you create a variable using `new` and don;t clean up after using `delete`, the program can result in **memory leaks** where the memory in the program accumulates over its run time, which can slow down or even crash your program.
 
 ```{r manage-memory}
-cppFunction('int manage_memory(){
+cppFunction('
+#include <Rcpp.h> 
+int manage_memory(){
   //initiate an integer type pointer
   int* ptr= new int;
   *ptr = 35;
-  std::cout << "*ptr = " << *ptr <<std::endl;
+  Rcpp::Rcout << "*ptr = " << *ptr <<std::endl;
   
   //delete memory 
   delete ptr;
@@ -143,6 +153,7 @@ shared_ptr<double> ptr = make_shared(x);
 Shared Pointer Example:
 ```{r shared-pointer}
 cppFunction('
+  #include <Rcpp.h> 
   //std::shared_ptr is defined in <memory>
   #include <memory>
   int shared_pointer(){
@@ -150,14 +161,14 @@ cppFunction('
     std::shared_ptr<int> ptr1 = std::make_shared<int>(42);
     std::shared_ptr<int> ptr2 = std::make_shared<int>(24);
     // Accessing the values using the (*) operator
-    std::cout << "ptr1: " << *ptr1 << std::endl;
-    std::cout << "ptr2: " << *ptr2 << std::endl;
+    Rcpp::Rcout << "ptr1: " << *ptr1 << std::endl;
+    Rcpp::Rcout << "ptr2: " << *ptr2 << std::endl;
     // Set up a new pointer that shares ownership with the ptr1
     std::shared_ptr<int> ptr3 = ptr1;
     // Checking if shared pointer 1 and shared pointer 3
-    std::cout << "ptr1 = " << ptr1 << std::endl;
-    std::cout << "ptr2 = " << ptr2 << std::endl;
-    std::cout << "ptr3 = " << ptr3 << std::endl;
+    Rcpp::Rcout << "ptr1 = " << ptr1 << std::endl;
+    Rcpp::Rcout << "ptr2 = " << ptr2 << std::endl;
+    Rcpp::Rcout << "ptr3 = " << ptr3 << std::endl;
     
     return 0;
 }')
