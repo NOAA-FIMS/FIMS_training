@@ -2,20 +2,7 @@
 title: "C++ Resources"
 author: "Andrea Havron<br>Christine Stawitz<br>NOAA Fisheries, OST"
 output:
-  xaringan::moon_reader:
-    self_contained: true
-    css: ["xaringan-themer.css", "slides-style.css"]
-    lib_dir: libs
-    nature:
-      ratio: '16:9'
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      slideNumberFormat: |
-        <div class="progress-bar-container">
-          <div class="progress-bar" style="width: calc( (%current% - 1) / (%total% - 1) * 100%);">
-          </div>
-        </div>`
+  html
 ---
 layout: true
 
