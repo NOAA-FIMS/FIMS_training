@@ -141,29 +141,37 @@ pointer points to, e.g. <code>*x</code>
 </li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'int reference() {</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
+<span><span class="st">int reference() {</span></span>
 <span><span class="st">  int y = 3;</span></span>
 <span><span class="st">  int &amp;x = y;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "x is: " &lt;&lt; x &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "y is: " &lt;&lt; y &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "The memory address of x is: " &lt;&lt; &amp;x &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "The memory address of y is: " &lt;&lt; &amp;y &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "x is: " &lt;&lt; x &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "y is: " &lt;&lt; y &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "The memory address of x is: " &lt;&lt; &amp;x &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "The memory address of y is: " &lt;&lt; &amp;y &lt;&lt; std::endl;</span></span>
 <span><span class="st">  </span></span>
 <span><span class="st">  return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'int pointer(){</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
+<span><span class="st">int pointer(){</span></span>
 <span><span class="st">  float y = 3.1459;</span></span>
 <span><span class="st">  //initiate a variable x that points to the same address as y</span></span>
 <span><span class="st">  float* x = &amp;y;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "x is equal to the address of y" &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "x is: " &lt;&lt; x &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt;  "The address of y is: " &lt;&lt; &amp;y &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "*x returns the value of y: " &lt;&lt; *x &lt;&lt;  std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "x is equal to the address of y" &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "x is: " &lt;&lt; x &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt;  "The address of y is: " &lt;&lt; &amp;y &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "*x returns the value of y: " &lt;&lt; *x &lt;&lt;  std::endl;</span></span>
 <span><span class="st">  return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## x is equal to the address of y</span></span>
+<span><span class="co">## x is: 0x7ffd63a692a4</span></span>
+<span><span class="co">## The address of y is: 0x7ffd63a692a4</span></span>
+<span><span class="co">## *x returns the value of y: 3.1459</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -174,8 +182,10 @@ pointer points to, e.g. <code>*x</code>
 <code>b</code> does not get updated when <code>*c</code> is updated. We
 avoid copies in FIMS because when a variable gets updated in the model,
 we want it updated everywhere in the model.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'int update_pointer(){</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
+<span><span class="st">int update_pointer(){</span></span>
 <span><span class="st"> //initiate a variable</span></span>
 <span><span class="st">  float a = 3.1459;</span></span>
 <span><span class="st">  //initiate a new variable with the same value as a</span></span>
@@ -183,19 +193,24 @@ we want it updated everywhere in the model.</p>
 <span><span class="st">  //initiate a variable c that points to the same address as a</span></span>
 <span><span class="st">  float* c = &amp;a;</span></span>
 <span><span class="st">  *c = 100;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "a and *c have been updated; b has not"  &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; "; *c = " &lt;&lt; *c &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "a and *c have been updated; b has not"  &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; "; *c = " &lt;&lt; *c &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; std::endl;</span></span>
 <span><span class="st">  return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">update_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## a and *c have been updated; b has not</span></span>
+<span><span class="co">## a = 100; *c = 100</span></span>
+<span><span class="co">## b = 3.1459</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>We can reassign pointers using the <code>&amp;</code> operator. What
 do you expect <code>a</code> and *c` to return in the following
 example?</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'int reassign_pointer(){</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
+<span><span class="st">int reassign_pointer(){</span></span>
 <span><span class="st">//initiate a variable</span></span>
 <span><span class="st">  float a = 3.1459;</span></span>
 <span><span class="st">  //initiate a new variable with the same value as a</span></span>
@@ -205,17 +220,24 @@ example?</p>
 <span><span class="st">  *c = 100;</span></span>
 <span><span class="st">  c = &amp;b;</span></span>
 <span><span class="st">  b = 10;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "c now equals the address of b" &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "&amp;a = " &lt;&lt; &amp;a &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "&amp;b = " &lt;&lt; &amp;b &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "c = " &lt;&lt; c &lt;&lt; std::endl; </span></span>
-<span><span class="st">  std::cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; std::endl;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; std::endl; </span></span>
-<span><span class="st">  std::cout &lt;&lt; "*c = " &lt;&lt; *c &lt;&lt;std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "c now equals the address of b" &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "&amp;a = " &lt;&lt; &amp;a &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "&amp;b = " &lt;&lt; &amp;b &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "c = " &lt;&lt; c &lt;&lt; std::endl; </span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; std::endl; </span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "*c = " &lt;&lt; *c &lt;&lt;std::endl;</span></span>
 <span><span class="st">  return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">reassign_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## c now equals the address of b</span></span>
+<span><span class="co">## &amp;a = 0x7ffd63a692a0</span></span>
+<span><span class="co">## &amp;b = 0x7ffd63a692a4</span></span>
+<span><span class="co">## c = 0x7ffd63a692a4</span></span>
+<span><span class="co">## a = 100</span></span>
+<span><span class="co">## b = 10</span></span>
+<span><span class="co">## *c = 10</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -230,12 +252,14 @@ variable using <code>new</code> and don;t clean up after using
 <code>delete</code>, the program can result in <strong>memory
 leaks</strong> where the memory in the program accumulates over its run
 time, which can slow down or even crash your program.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'int manage_memory(){</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
+<span><span class="st">int manage_memory(){</span></span>
 <span><span class="st">  //initiate an integer type pointer</span></span>
 <span><span class="st">  int* ptr= new int;</span></span>
 <span><span class="st">  *ptr = 35;</span></span>
-<span><span class="st">  std::cout &lt;&lt; "*ptr = " &lt;&lt; *ptr &lt;&lt;std::endl;</span></span>
+<span><span class="st">  Rcpp::Rcout &lt;&lt; "*ptr = " &lt;&lt; *ptr &lt;&lt;std::endl;</span></span>
 <span><span class="st">  </span></span>
 <span><span class="st">  //delete memory </span></span>
 <span><span class="st">  delete ptr;</span></span>
@@ -243,6 +267,7 @@ time, which can slow down or even crash your program.</p>
 <span><span class="st">}'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">manage_memory</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## *ptr = 35</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -265,17 +290,18 @@ pointer would have a reference count of two. When the reference count
 drops to zero, the memory where the recruitment module is saved would be
 automatically deleted.</p>
 <p>Declare a shared pointer:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span> ptr;</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span> ptr;</span></code></pre></div>
 <p>Initialize using a new pointer:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span><span class="er">*</span> ptr;</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span> ptr <span class="ot">=</span> std<span class="sc">::</span>makes_shared<span class="sc">&lt;</span>Type<span class="sc">&gt;</span>();</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span><span class="er">*</span> ptr;</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>std<span class="sc">::</span>shared_ptr<span class="sc">&lt;</span>Type<span class="sc">&gt;</span> ptr <span class="ot">=</span> std<span class="sc">::</span>makes_shared<span class="sc">&lt;</span>Type<span class="sc">&gt;</span>();</span></code></pre></div>
 <p>Initialize using existing pointer:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>double<span class="sc">*</span> x <span class="ot">=</span> <span class="fl">3.2</span>; </span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>shared_ptr<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">ptr</span>(x);</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>shared_ptr<span class="sc">&lt;</span>double<span class="sc">&gt;</span> ptr <span class="ot">=</span> <span class="fu">make_shared</span>(x);</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>double<span class="sc">*</span> x <span class="ot">=</span> <span class="fl">3.2</span>; </span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>shared_ptr<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">ptr</span>(x);</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>shared_ptr<span class="sc">&lt;</span>double<span class="sc">&gt;</span> ptr <span class="ot">=</span> <span class="fu">make_shared</span>(x);</span></code></pre></div>
 <p>Shared Pointer Example:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
+<span><span class="st">  #include &lt;Rcpp.h&gt; </span></span>
 <span><span class="st">  //std::shared_ptr is defined in &lt;memory&gt;</span></span>
 <span><span class="st">  #include &lt;memory&gt;</span></span>
 <span><span class="st">  int shared_pointer(){</span></span>
@@ -283,19 +309,24 @@ automatically deleted.</p>
 <span><span class="st">    std::shared_ptr&lt;int&gt; ptr1 = std::make_shared&lt;int&gt;(42);</span></span>
 <span><span class="st">    std::shared_ptr&lt;int&gt; ptr2 = std::make_shared&lt;int&gt;(24);</span></span>
 <span><span class="st">    // Accessing the values using the (*) operator</span></span>
-<span><span class="st">    std::cout &lt;&lt; "ptr1: " &lt;&lt; *ptr1 &lt;&lt; std::endl;</span></span>
-<span><span class="st">    std::cout &lt;&lt; "ptr2: " &lt;&lt; *ptr2 &lt;&lt; std::endl;</span></span>
+<span><span class="st">    Rcpp::Rcout &lt;&lt; "ptr1: " &lt;&lt; *ptr1 &lt;&lt; std::endl;</span></span>
+<span><span class="st">    Rcpp::Rcout &lt;&lt; "ptr2: " &lt;&lt; *ptr2 &lt;&lt; std::endl;</span></span>
 <span><span class="st">    // Set up a new pointer that shares ownership with the ptr1</span></span>
 <span><span class="st">    std::shared_ptr&lt;int&gt; ptr3 = ptr1;</span></span>
 <span><span class="st">    // Checking if shared pointer 1 and shared pointer 3</span></span>
-<span><span class="st">    std::cout &lt;&lt; "ptr1 = " &lt;&lt; ptr1 &lt;&lt; std::endl;</span></span>
-<span><span class="st">    std::cout &lt;&lt; "ptr2 = " &lt;&lt; ptr2 &lt;&lt; std::endl;</span></span>
-<span><span class="st">    std::cout &lt;&lt; "ptr3 = " &lt;&lt; ptr3 &lt;&lt; std::endl;</span></span>
+<span><span class="st">    Rcpp::Rcout &lt;&lt; "ptr1 = " &lt;&lt; ptr1 &lt;&lt; std::endl;</span></span>
+<span><span class="st">    Rcpp::Rcout &lt;&lt; "ptr2 = " &lt;&lt; ptr2 &lt;&lt; std::endl;</span></span>
+<span><span class="st">    Rcpp::Rcout &lt;&lt; "ptr3 = " &lt;&lt; ptr3 &lt;&lt; std::endl;</span></span>
 <span><span class="st">    </span></span>
 <span><span class="st">    return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">shared_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ptr1: 42</span></span>
+<span><span class="co">## ptr2: 24</span></span>
+<span><span class="co">## ptr1 = 0x55f0a7769e40</span></span>
+<span><span class="co">## ptr2 = 0x55f0aaee6540</span></span>
+<span><span class="co">## ptr3 = 0x55f0a7769e40</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
   </div>
