@@ -123,18 +123,18 @@ FIMS uses [shared pointers](https://www.geeksforgeeks.org/cpp/shared_ptr-in-cpp/
 Specifically, each shared pointers has a reference count that tracks the number of instances in which the shared points points to the same object. In the example above, information and population both reference the recruitment module using a shared pointer, so the recruitment module pointer would have a reference count of two. When the reference count drops to zero, the memory where the recruitment module is saved would be automatically deleted. 
 
 Declare a shared pointer:
-```{cpp, eval - FALSE}
+```{r eval = FALSE}
 std::shared_ptr<Type> ptr;
 ```
 
 Initialize using a new pointer:
-```{cpp, eval - FALSE}
+```{r eval = FALSE}
 std::shared_ptr<Type>* ptr;
 std::shared_ptr<Type> ptr = std::makes_shared<Type>();
 ```
 
 Initialize using existing pointer:
-```{cpp, eval = FALSE}
+```{r eval = FALSE}
 double* x = 3.2; 
 shared_ptr<double> ptr(x);
 shared_ptr<double> ptr = make_shared(x);
