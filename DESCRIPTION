@@ -7,6 +7,7 @@ URL: https://nmfs-fish-tools.github.io/pkgdownTemplate, https://github.com/nmfs-
 BugReports: https://github.com/nmfs-fish-tools/pkgdownTemplate/issues
 Description: This is a template package for a NMFS branded R package with a pkgdown website.
 Depends: R (>= 4.0.0)
+Imports: Rcpp
 Suggests: 
     rmarkdown,
     knitr
