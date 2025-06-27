@@ -1,0 +1,140 @@
+---
+title: "FIMS Architecture"
+author: "Andrea Havron"
+date: "2023-08-08"
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: ["xaringan-themer.css", "slides-style.css"]
+    lib_dir: libs
+    nature:
+      ratio:  '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc( (%current% - 1) / (%total% - 1) * 100%);">
+          </div>
+        </div>`
+---
+
+layout: true
+
+.footnote[U.S. Department of Commerce | National Oceanic and Atmospheric Administration | National Marine Fisheries Service]
+
+
+<style type="text/css">
+
+code.cpp{
+  font-size: 14px;
+}
+code.r{
+  font-size: 14px;
+}
+
+
+</style>
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::knit_hooks$set(chunk = function(x, options) {
+  gsub('```\\{[.][a-z]+ [.]([a-z]+)\\}', '```\\1', x)
+})
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+# this gives you a tile navigation if you type "O" at any time
+xaringanExtra::use_tile_view()
+```
+
+
+
+<style type="text/css">
+code span.co{
+  color: #8c8c8c; 
+}
+</style>
+
+---
+Tutorial color guide:
+- R code blue
+- Rcpp interface code in orange
+- fims core code in green
+- information in grey.
+
+---
+## Setting up a module in R - Maturity
+
+.column-50[
+```{r, class.source = "rchunk", eval = FALSE}
+# load FIMS
+library(FIMS)
+# Create a new maturity model
+Fims <- Rcpp::Module("fims", PACKAGE = "FIMS")
+maturity <- new(Fims$LogisticMaturity)
+# Populate the maturity module
+# with parameter values.
+maturity$median$value <- 10
+maturity$median$is_random_effect <- FALSE
+maturity$median$estimated <- FALSE
+maturity$slope$value <- 0.2
+maturity$slope$is_random_effect <- FALSE
+maturity$slope$estimated <- FALSE
+```
+]
+.column-50[
+```{r, image-path-maturity-1, echo = FALSE, message=FALSE, out.width = '100%'}
+knitr::include_graphics("static/fims-path-maturity-1.png")
+```
+]
+---
+## Maturity Rcpp Interface
+
+.column-50[
+```{r, class.source = "rchunk", eval = FALSE}
+# load FIMS
+library(FIMS)
+# Create a new maturity model
+Fims <- Rcpp::Module("fims", PACKAGE = "FIMS")
+maturity <- new(Fims$LogisticMaturity)
+# Populate the maturity module
+# with parameter values.
+maturity$median$value <- 10
+maturity$median$is_random_effect <- FALSE
+maturity$median$estimated <- FALSE
+maturity$slope$value <- 0.2
+maturity$slope$is_random_effect <- FALSE
+maturity$slope$estimated <- FALSE
+```
+.orangebox[
+```{Rcpp,eval = FALSE}
+Rcpp::class_<LogisticMaturityInterface>("LogisticMaturity")
+    .constructor()
+    .field("median", &LogisticMaturityInterface::median)
+    .field("slope", &LogisticMaturityInterface::slope)
+    .method("get_id", &LogisticMaturityInterface::get_id)
+    .method("evaluate", &LogisticMaturityInterface::evaluate);
+```
+]]
+.column-50[
+```{Rcpp, class.source = "rcppchunk", eval = FALSE}
+class MaturityInterfaceBase : public FIMSRcppInterfaceBase {
+ public:
+  static uint32_t id_g; /**< static id of the recruitment interface base*/
+  uint32_t id;          /**< id of the recruitment interface base */
+  ...
+}
+
+class LogisticMaturityInterface : public MaturityInterfaceBase {
+ public:
+  Parameter median; /**< the index value at which the response reaches .5 */
+  Parameter slope;  /**< the width of the curve at the median */
+  ...
+}
+```
+```{r, image-path-maturity-1a, echo = FALSE, message=FALSE, out.width = '100%'}
+knitr::include_graphics("static/fims-path-maturity-1.png")
+```
+]
