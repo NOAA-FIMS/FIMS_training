@@ -111,35 +111,12 @@ users can interact with C++ code in a familiar environment.</p>
 <div class="section level2">
 <h2 id="definitions">Definitions:<a class="anchor" aria-label="anchor" href="#definitions"></a>
 </h2>
-<ul>
-<li>
-<a href="https://www.w3schools.com/cpp/cpp_references.asp" class="external-link">C++
-Reference</a>:
-<ul>
-<li>A reference variable is an alias for an existing variable. It is
-created using the <code>&amp;</code> operator,
-e.g. <code>int y = 3; int &amp;x = y</code>
-</li>
-<li>The operator <code>&amp;</code> can also be used to return the
-memory address of a variable, e.g. <code>&amp;x</code>
-</li>
-</ul>
-</li>
-<li>
-<a href="https://www.w3schools.com/cpp/cpp_pointers.asp" class="external-link">C++
-Pointer</a>:
-<ul>
-<li>A variable that stores the memory address as its value. It is
-created using the <code>*</code> operator,
-e.g. <code>int y = 3; int* x = &amp;y;</code> In FIMS, we used shared
-pointer declared, <code>std::shared_ptr&lt;int&gt; y</code> which we
-will explore later.</li>
-<li>The operator <code>*</code> can also be used to access the value the
-pointer points to, e.g. <code>*x</code>
-</li>
-</ul>
-</li>
-</ul>
+<p><a href="https://www.w3schools.com/cpp/cpp_references.asp" class="external-link">C++
+Reference</a>: - A reference variable is an alias for an existing
+variable. - It is created using the <code>&amp;</code> operator,
+e.g. <code>int y = 3; int &amp;x = y</code> - The operator
+<code>&amp;</code> can also be used to return the memory address of a
+variable, e.g. <code>&amp;x</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
@@ -153,6 +130,14 @@ pointer points to, e.g. <code>*x</code>
 <span><span class="st">  </span></span>
 <span><span class="st">  return 0;</span></span>
 <span><span class="st">}'</span><span class="op">)</span></span></code></pre></div>
+<p><a href="https://www.w3schools.com/cpp/cpp_pointers.asp" class="external-link">C++
+Pointer</a>: - A variable that stores the memory address as its value. -
+It is created using the <code>*</code> operator,
+e.g. <code>int y = 3; int* x = &amp;y;</code> - The operator
+<code>*</code> can also be used to access the value the pointer points
+to, e.g. <code>*x</code> - In FIMS, we used shared pointer declared,
+<code>std::shared_ptr&lt;int&gt; y</code> which we will explore
+later.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">cppFunction</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">#include &lt;Rcpp.h&gt; </span></span>
@@ -169,8 +154,8 @@ pointer points to, e.g. <code>*x</code>
 <span></span>
 <span><span class="fu">pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## x is equal to the address of y</span></span>
-<span><span class="co">## x is: 0x7ffd63a692a4</span></span>
-<span><span class="co">## The address of y is: 0x7ffd63a692a4</span></span>
+<span><span class="co">## x is: 0x7fff9a826774</span></span>
+<span><span class="co">## The address of y is: 0x7fff9a826774</span></span>
 <span><span class="co">## *x returns the value of y: 3.1459</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
@@ -232,9 +217,9 @@ example?</p>
 <span></span>
 <span><span class="fu">reassign_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## c now equals the address of b</span></span>
-<span><span class="co">## &amp;a = 0x7ffd63a692a0</span></span>
-<span><span class="co">## &amp;b = 0x7ffd63a692a4</span></span>
-<span><span class="co">## c = 0x7ffd63a692a4</span></span>
+<span><span class="co">## &amp;a = 0x7fff9a826770</span></span>
+<span><span class="co">## &amp;b = 0x7fff9a826774</span></span>
+<span><span class="co">## c = 0x7fff9a826774</span></span>
 <span><span class="co">## a = 100</span></span>
 <span><span class="co">## b = 10</span></span>
 <span><span class="co">## *c = 10</span></span></code></pre>
@@ -324,9 +309,9 @@ automatically deleted.</p>
 <span><span class="fu">shared_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ptr1: 42</span></span>
 <span><span class="co">## ptr2: 24</span></span>
-<span><span class="co">## ptr1 = 0x55f0a7769e40</span></span>
-<span><span class="co">## ptr2 = 0x55f0aaee6540</span></span>
-<span><span class="co">## ptr3 = 0x55f0a7769e40</span></span></code></pre>
+<span><span class="co">## ptr1 = 0x564bb2590ad0</span></span>
+<span><span class="co">## ptr2 = 0x564bb19454a0</span></span>
+<span><span class="co">## ptr3 = 0x564bb2590ad0</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
   </div>
