@@ -10,7 +10,8 @@ Depends: R (>= 4.0.0)
 Imports: Rcpp
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    microbenchmark
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
