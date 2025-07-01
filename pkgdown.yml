@@ -3,4 +3,5 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   CppMemory: CppMemory.html
-last_built: 2025-07-01T13:47Z
+  IntroRcpp: IntroRcpp.html
+last_built: 2025-07-01T19:47Z
