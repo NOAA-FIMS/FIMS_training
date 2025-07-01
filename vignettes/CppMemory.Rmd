@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Rcpp
-This tutorial will use Rcpp to write C++ code directly in R so that R users can interact with C++ code in a familiar environment.
+This tutorial will use Rcpp to write C++ code directly in R so that R users can interact with C++ code in a familiar environment. C++ code is wrapped in the Rcpp function, `cppFunction()`, which when run, will automatically compile the C++ code and expose the C++ function to the R environment.
 ```{r load-Rcpp}
 library(Rcpp)
 ```
@@ -35,6 +35,8 @@ int reference() {
   
   return 0;
 }')
+
+reference()
 ```
 
 [C++ Pointer](https://www.w3schools.com/cpp/cpp_pointers.asp):
@@ -112,7 +114,10 @@ reassign_pointer()
 
 ## Memory Management
 
-When pointers are initialized inline, e.g. `int x = 3; int* y = x`, the compiler automatically creates and manages memory for you. The user can also create and manage memory themselves using the `new` and `delete` commands. Care must be taken to manage memory properly. If you create a variable using `new` and don;t clean up after using `delete`, the program can result in **memory leaks** where the memory in the program accumulates over its run time, which can slow down or even crash your program.
+- When pointers are initialized inline, e.g. `int x = 3; int* y = x`, the compiler automatically creates and manages memory for you. 
+- The user can also create and manage memory themselves using the `new` and `delete` commands. 
+- Care must be taken to manage memory properly. 
+- If you create a variable using `new` and don't clean up after using `delete`, the program can result in **memory leaks** where the memory in the program accumulates over its run time, which can slow down or even crash your program.
 
 ```{r manage-memory}
 cppFunction('
