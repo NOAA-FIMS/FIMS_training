@@ -138,18 +138,19 @@ src <-
   "#include <Rcpp.h>
   using namespace Rcpp; 
 
+  // [[Rcpp::export]]
   NumericVector fun(){
-  //create new vector of size 3
-  NumericVector v = NumericVector::create(1,2,3);
-  Rcout << NumericVector::get_NA() << std::endl;
+    //create new vector of size 3
+    NumericVector v = NumericVector::create(1,2,3);
+    Rcout << NumericVector::get_na() << std::endl;
+    
+    //operate on object v
+    Rcout << v.size() << std::endl;
+    //append a new value to the vector
+    v.push_back(4);
   
-  //operate on object v
-  Rcout << v.size() << std::endl;
-  //append a new value to the vector
-  v.push_back(4);
-
-  return v;
-}
+    return v;
+  }
 "
 
 sourceCpp(code = src)
