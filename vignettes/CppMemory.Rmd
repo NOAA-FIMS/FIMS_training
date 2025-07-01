@@ -16,12 +16,11 @@ library(Rcpp)
 
 
 ## Definitions:
-- [C++ Reference](https://www.w3schools.com/cpp/cpp_references.asp): 
-  - A reference variable is an alias for an existing variable. It is created using the `&` operator, e.g. `int y = 3; int &x = y`
+[C++ Reference](https://www.w3schools.com/cpp/cpp_references.asp): 
+  - A reference variable is an alias for an existing variable. 
+  - It is created using the `&` operator, e.g. `int y = 3; int &x = y`
   - The operator `&` can also be used to return the memory address of a variable, e.g. `&x`
-- [C++ Pointer](https://www.w3schools.com/cpp/cpp_pointers.asp):
-  - A variable that stores the memory address as its value. It is created using the `*` operator, e.g. `int y = 3; int* x = &y;` In FIMS, we used shared pointer declared, `std::shared_ptr<int> y` which we will explore later.
-  - The operator `*` can also be used to access the value the pointer points to, e.g. `*x` 
+
   
 ```{r def-reference}
 cppFunction('
@@ -38,6 +37,11 @@ int reference() {
 }')
 ```
 
+[C++ Pointer](https://www.w3schools.com/cpp/cpp_pointers.asp):
+  - A variable that stores the memory address as its value. 
+  - It is created using the `*` operator, e.g. `int y = 3; int* x = &y;`
+  - The operator `*` can also be used to access the value the pointer points to, e.g. `*x` 
+  - In FIMS, we used shared pointer declared, `std::shared_ptr<int> y` which we will explore later.
 
 ```{r def-pointer}
 cppFunction('
