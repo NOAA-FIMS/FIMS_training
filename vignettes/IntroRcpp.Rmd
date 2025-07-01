@@ -38,14 +38,13 @@ cppFunction('int add(int x, int y, int z) {
 # add works like a regular R function
 add
 add(1, 2, 3)
-evalCpp("std::numeric_limits<double>::max()")
 ```
 
 
 # Calling `C++` from `R`
 
 mean.cpp
-```{Rcpp}
+```{Rcpp meanC}
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -69,12 +68,31 @@ double meanC(NumericVector x) {
 
 # Calling `C++` from `R`
 
-```{r eval=FALSE}
-sourceCpp("mean.cpp")
+```{r }
+# code can be saved in .cpp file and sourced:
+# sourceCpp("mean.cpp")
+
+# code can be sourced directly
+src <- 
+"#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+double meanC(NumericVector x) {
+  int n = x.size();
+  double total = 0;
+
+  for(int i = 0; i < n; ++i) {
+    total += x[i];
+  }
+  return total / n;
+}
+"
+sourceCpp(code = src)
 ```
 
 
-```{r}
+```{r microbench}
 library(microbenchmark)
 x <- runif(1e5)
 microbenchmark(
