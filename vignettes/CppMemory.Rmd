@@ -1,7 +1,6 @@
 ---
 title: "C++ Pointers and References"
 author: "Andrea Havron"
-date: "2025-06-27"
 output: html_document
 ---
 

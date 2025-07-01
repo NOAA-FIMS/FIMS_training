@@ -2,6 +2,11 @@
 title: "Intro to Rcpp"
 author: "Christine Stawitz"
 output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 # Sources
 - "Advanced `R`"  by Hadley Wickham (http://adv-r.had.co.nz/Rcpp.html)
@@ -38,6 +43,8 @@ cppFunction('int add(int x, int y, int z) {
 # add works like a regular R function
 add
 add(1, 2, 3)
+
+evalCpp( "std::numeric_limits<double>::max()" )
 ```
 
 
@@ -64,11 +71,10 @@ double meanC(NumericVector x) {
 
 * `#include <Rcpp.h>` allows you to call `Rcpp` syntax in the file. You can omit `using namespace Rcpp` if you use `::` i.e. `Rcpp::NumericVector` 
 * `// [[Rcpp::export]]` - put this above any function you want to make available in `R`
-* `NumericVector, .size()` useful type, function implemented in `Rcpp`]
+* `NumericVector, .size()` useful type, function implemented in `Rcpp`
 
-# Calling `C++` from `R`
 
-```{r }
+```{r}
 # code can be saved in .cpp file and sourced:
 # sourceCpp("mean.cpp")
 
@@ -108,30 +114,47 @@ microbenchmark(
 
 # Typing and methods
 
+## Rcpp Types
+
 - Scalar classes
-* `int`
-* `double`
-* `bool`
-* `String`
+ * `int`
+ * `double`
+ * `bool`
+ * `String`
 - vector classes
-* `IntegerVector`
-* `NumericVector`
-* `LogicalVector`
-* `CharacterVector`
+ * `IntegerVector`
+ * `NumericVector`
+ * `LogicalVector`
+ * `CharacterVector`
 
 
+## Rcpp methods
 
-- Vector classes have useful static methods (called with `::` on class) 
-  ```{Rcpp eval=FALSE}
-   NumericVector v = NumericVector::create(1,2,3);
-  NumericVector::get_NA(); 
-  ```
+- Static methods (called with `::` on class) 
 - Member functions or methods (called with `.` on object)
-  ```{Rcpp eval=FALSE} 
-  v.size(); 
+
+```{r}
+src <- 
+  "#include <Rcpp.h>
+  using namespace Rcpp; 
+
+  NumericVector fun(){
+  //create new vector of size 3
+  NumericVector v = NumericVector::create(1,2,3);
+  Rcout << NumericVector::get_NA() << std::endl;
+  
+  //operate on object v
+  Rcout << v.size() << std::endl;
+  //append a new value to the vector
   v.push_back(4);
-  ```
-  operate on object `v`
+
+  return v;
+}
+"
+
+sourceCpp(code = src)
+fun()
+```
 
 
 # `Rcpp` modules
