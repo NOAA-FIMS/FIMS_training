@@ -117,15 +117,15 @@ microbenchmark(
 ## Rcpp Types
 
 - Scalar classes
- * `int`
- * `double`
- * `bool`
- * `String`
-- vector classes
- * `IntegerVector`
- * `NumericVector`
- * `LogicalVector`
- * `CharacterVector`
+    * `int`
+    * `double`
+    * `bool`
+    * `String`
+- Vector classes
+    * `IntegerVector`
+    * `NumericVector`
+    * `LogicalVector`
+    * `CharacterVector`
 
 
 ## Rcpp methods
