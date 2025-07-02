@@ -63,6 +63,9 @@
     <li>
       <a href="../articles/CppMemory.html">C++ Memory Management</a>
     </li>
+    <li>
+      <a href="../articles/CppClassStructure">C++ Class Structure</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -166,7 +169,7 @@ function runs A LOT</li>
 <span><span class="co"># add works like a regular R function</span></span>
 <span><span class="va">add</span></span></code></pre></div>
 <pre><code><span><span class="co">## function (x, y, z) </span></span>
-<span><span class="co">## .Call(&lt;pointer: 0x7f452ac9d530&gt;, x, y, z)</span></span></code></pre>
+<span><span class="co">## .Call(&lt;pointer: 0x7f86cae9b530&gt;, x, y, z)</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
@@ -236,9 +239,9 @@ implemented in <code>Rcpp</code>
 <span>  <span class="fu">meanC</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Unit: microseconds</span></span>
-<span><span class="co">##      expr     min       lq     mean   median      uq      max neval</span></span>
-<span><span class="co">##   mean(x) 414.402 416.5665 422.2386 418.8805 425.473   514.52   100</span></span>
-<span><span class="co">##  meanC(x) 371.773 372.2945 476.7148 372.8900 381.356 10431.70   100</span></span></code></pre>
+<span><span class="co">##      expr     min       lq     mean  median       uq      max neval</span></span>
+<span><span class="co">##   mean(x) 414.223 415.7650 421.5224 418.451 424.9125   509.22   100</span></span>
+<span><span class="co">##  meanC(x) 371.383 371.8635 476.9436 372.740 381.0210 10476.62   100</span></span></code></pre>
 <ul>
 <li>
 <code>sourceCpp</code> compiles the file</li>
