@@ -8,6 +8,7 @@ BugReports: https://github.com/NOAA-FIMS/FIMS_training/issues
 Description: This is a collection of vignettes that provide need to know C++ to read and develop FIMS.
 Depends: R (>= 4.0.0)
 Imports: Rcpp
+Include: Rcpp
 Suggests: 
     rmarkdown,
     knitr,
