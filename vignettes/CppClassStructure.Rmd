@@ -85,7 +85,7 @@ The above two code chunks are saved in `src/myclass.cpp`. Note the following hea
 
 The following runs the file using Rcpp:
 ```{r}
-sourceCpp("../src/my_class.cpp")
+Rcpp::sourceCpp("../src/my_class.cpp")
 my_class_add()
 ```
   
