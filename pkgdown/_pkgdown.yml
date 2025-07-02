@@ -34,3 +34,5 @@ navbar:
         href: articles/CppMemory.html
       - text: C++ Class Structure
         href: articles/CppClassStructure
+      - text: Templated C++
+        href: articles/TemplatedCpp
