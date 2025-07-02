@@ -9,6 +9,7 @@ Description: This is a collection of vignettes that provide need to know C++ to 
 Depends: R (>= 4.0.0)
 Imports: Rcpp
 Include: Rcpp
+LinkingTo: Rcpp
 Suggests: 
     rmarkdown,
     knitr,
