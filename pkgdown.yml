@@ -6,8 +6,8 @@ articles:
   CppMemory: CppMemory.html
   GettingToKnowCpp: GettingToKnowCpp.html
   IntroRcpp: IntroRcpp.html
-  Templated Cpp: Templated Cpp.html
-last_built: 2025-07-02T21:14Z
+  TemplatedCpp: TemplatedCpp.html
+last_built: 2025-07-02T21:22Z
 urls:
   reference: https://NOAA-FIMS.github.io/FIMS_training/reference
   article: https://NOAA-FIMS.github.io/FIMS_training/articles

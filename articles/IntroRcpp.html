@@ -172,7 +172,7 @@ function runs A LOT</li>
 <span><span class="co"># add works like a regular R function</span></span>
 <span><span class="va">add</span></span></code></pre></div>
 <pre><code><span><span class="co">## function (x, y, z) </span></span>
-<span><span class="co">## .Call(&lt;pointer: 0x7f827609d530&gt;, x, y, z)</span></span></code></pre>
+<span><span class="co">## .Call(&lt;pointer: 0x7fcbe529d530&gt;, x, y, z)</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
@@ -242,9 +242,9 @@ implemented in <code>Rcpp</code>
 <span>  <span class="fu">meanC</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Unit: microseconds</span></span>
-<span><span class="co">##      expr     min       lq     mean   median      uq      max neval</span></span>
-<span><span class="co">##   mean(x) 414.051 415.9145 421.2748 417.9385 424.912   499.45   100</span></span>
-<span><span class="co">##  meanC(x) 371.602 372.0680 479.2982 372.5290 381.125 10693.03   100</span></span></code></pre>
+<span><span class="co">##      expr     min       lq     mean   median      uq       max neval</span></span>
+<span><span class="co">##   mean(x) 414.714 415.9465 421.3515 418.0545 424.963   526.423   100</span></span>
+<span><span class="co">##  meanC(x) 371.905 372.2200 481.0100 372.6255 381.321 10864.564   100</span></span></code></pre>
 <ul>
 <li>
 <code>sourceCpp</code> compiles the file</li>
