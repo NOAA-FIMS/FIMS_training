@@ -3,5 +3,9 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   CppMemory: CppMemory.html
+  GettingToKnowCpp: GettingToKnowCpp.html
   IntroRcpp: IntroRcpp.html
-last_built: 2025-07-01T23:21Z
+last_built: 2025-07-02T00:49Z
+urls:
+  reference: https://NOAA-FIMS.github.io/FIMS_training/reference
+  article: https://NOAA-FIMS.github.io/FIMS_training/articles

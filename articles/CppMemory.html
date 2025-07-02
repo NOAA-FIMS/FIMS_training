@@ -5,12 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C++ Pointers and References • pkgdownTemplate</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
-<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" sizes="any" href="../favicon.ico">
-<link rel="manifest" href="../site.webmanifest">
+<title>C++ Pointers and References • FIMSTraining</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -37,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">pkgdownTemplate</a>
+        <a class="navbar-link" href="../index.html">FIMSTraining</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
       </span>
     </div>
@@ -60,12 +55,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/CppMemory.html">C++ Memory</a>
+      <a href="../articles/GettingToKnowCpp.html">Getting to Know C++</a>
+    </li>
+    <li>
+      <a href="../articles/IntroRcpp.html">Intro to Rcpp</a>
+    </li>
+    <li>
+      <a href="../articles/CppMemory.html">C++ Memory Management</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="https://github.com/NOAA-FIMS/FIMS-Training/issues" class="external-link">
+  <a href="https://github.com/NOAA-FIMS/FIMS_Training/issues" class="external-link">
     <span class="fas fa-question-circle fa-lg"></span>
 
     Issues
@@ -73,7 +74,13 @@
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
-<li class="dropdown-header">Source Code</li>
+<li>
+  <a href="https://github.com/NOAA-FIMS/FIMS_Training" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+
+    Source Code
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -92,7 +99,7 @@
 Havron</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/nmfs-fish-tools/pkgdownTemplate/blob/main/vignettes/CppMemory.Rmd" class="external-link"><code>vignettes/CppMemory.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/NOAA-FIMS/FIMS_training/blob/main/vignettes/CppMemory.Rmd" class="external-link"><code>vignettes/CppMemory.Rmd</code></a></small>
       <div class="hidden name"><code>CppMemory.Rmd</code></div>
 
     </div>
@@ -136,8 +143,8 @@ variable, e.g. <code>&amp;x</code></p>
 <span><span class="fu">reference</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## x is: 3</span></span>
 <span><span class="co">## y is: 3</span></span>
-<span><span class="co">## The memory address of x is: 0x7ffe4bc2d8b4</span></span>
-<span><span class="co">## The memory address of y is: 0x7ffe4bc2d8b4</span></span></code></pre>
+<span><span class="co">## The memory address of x is: 0x7ffca4f5f9d4</span></span>
+<span><span class="co">## The memory address of y is: 0x7ffca4f5f9d4</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p><a href="https://www.w3schools.com/cpp/cpp_pointers.asp" class="external-link">C++
 Pointer</a>: - A variable that stores the memory address as its value. -
@@ -163,8 +170,8 @@ later.</p>
 <span></span>
 <span><span class="fu">pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## x is equal to the address of y</span></span>
-<span><span class="co">## x is: 0x7ffe4bc2d8b4</span></span>
-<span><span class="co">## The address of y is: 0x7ffe4bc2d8b4</span></span>
+<span><span class="co">## x is: 0x7ffca4f5f9d4</span></span>
+<span><span class="co">## The address of y is: 0x7ffca4f5f9d4</span></span>
 <span><span class="co">## *x returns the value of y: 3.1459</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
@@ -226,9 +233,9 @@ example?</p>
 <span></span>
 <span><span class="fu">reassign_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## c now equals the address of b</span></span>
-<span><span class="co">## &amp;a = 0x7ffe4bc2d8b0</span></span>
-<span><span class="co">## &amp;b = 0x7ffe4bc2d8b4</span></span>
-<span><span class="co">## c = 0x7ffe4bc2d8b4</span></span>
+<span><span class="co">## &amp;a = 0x7ffca4f5f9d0</span></span>
+<span><span class="co">## &amp;b = 0x7ffca4f5f9d4</span></span>
+<span><span class="co">## c = 0x7ffca4f5f9d4</span></span>
 <span><span class="co">## a = 100</span></span>
 <span><span class="co">## b = 10</span></span>
 <span><span class="co">## *c = 10</span></span></code></pre>
@@ -322,9 +329,9 @@ automatically deleted.</p>
 <span><span class="fu">shared_pointer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ptr1: 42</span></span>
 <span><span class="co">## ptr2: 24</span></span>
-<span><span class="co">## ptr1 = 0x564060b66db0</span></span>
-<span><span class="co">## ptr2 = 0x56405f7c9350</span></span>
-<span><span class="co">## ptr3 = 0x564060b66db0</span></span></code></pre>
+<span><span class="co">## ptr1 = 0x5555cdfbdce0</span></span>
+<span><span class="co">## ptr2 = 0x5555cdbc1520</span></span>
+<span><span class="co">## ptr3 = 0x5555cdfbdce0</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
   </div>
@@ -339,7 +346,7 @@ automatically deleted.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Elizabeth Holmes, Bai Li, Christine Stawitz.</p>
+<p>Developed by Andrea Havron, Christine Stawitz.</p>
 </div>
 
 <div class="pkgdown">

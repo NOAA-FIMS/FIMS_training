@@ -1,12 +1,13 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/LICENSE-text.html</loc></url>
-<url><loc>/articles/CppMemory.html</loc></url>
-<url><loc>/articles/IntroRcpp.html</loc></url>
-<url><loc>/articles/index.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/news/index.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/404.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/LICENSE-text.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/articles/CppMemory.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/articles/GettingToKnowCpp.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/articles/IntroRcpp.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/articles/index.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/authors.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/index.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/news/index.html</loc></url>
+<url><loc>https://NOAA-FIMS.github.io/FIMS_training/reference/index.html</loc></url>
 </urlset>
 
