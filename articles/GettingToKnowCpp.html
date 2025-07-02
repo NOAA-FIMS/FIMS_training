@@ -180,10 +180,21 @@ program is run</li>
 <div class="section level2">
 <h2 id="c-types">C++ Types<a class="anchor" aria-label="anchor" href="#c-types"></a>
 </h2>
-<p><code>bool</code>: Boolean (lowercase: <code>true</code> or
-<code>false</code>) <code>char</code>: Character <code>int</code>:
-Integer <code>float</code>: Floating point <code>double</code>: Double
-floating point <code>void</code>: No return value</p>
+<ul>
+<li>
+<code>bool</code>: Boolean (lowercase: <code>true</code> or
+<code>false</code>)</li>
+<li>
+<code>char</code>: Character</li>
+<li>
+<code>int</code>: Integer</li>
+<li>
+<code>float</code>: Floating point</li>
+<li>
+<code>double</code>: Double floating point</li>
+<li>
+<code>void</code>: No return value</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="simple-addition-program">Simple Addition Program<a class="anchor" aria-label="anchor" href="#simple-addition-program"></a>
@@ -192,7 +203,7 @@ floating point <code>void</code>: No return value</p>
 integer output:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  x <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  y <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The above program will fail if inputs are decimals. An additional
@@ -200,24 +211,47 @@ program is needed to handle the different data type. The following will
 return a floating point output:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="dt">double</span> add<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  x <span class="op">=</span> <span class="fl">1.2</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  x <span class="op">=</span> <span class="fl">2.4</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  y <span class="op">=</span> <span class="fl">2.4</span><span class="op">;</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="vector-type">Vector Type<a class="anchor" aria-label="anchor" href="#vector-type"></a>
 </h2>
-<p><code>std::vector</code>: vector from standard library - The type is
-specified using the basic C++ types, i.e. std::vector<int> is a vector
-of integers - <code>std::vector</code> has a number of member functions
-that can be used to operate on the vector - <code>begin</code>: return
-iterator to beginning - <code>end</code>: return iterator to end -
-<code>size</code>: returns vector size - <code>resize</code>: changes
-the vector size - <code>[]</code>: access element - <code>front</code>:
-access first element - <code>back</code>: access last element -
-<code>push_back</code>: append element to end - <code>pop_back</code>:
-delete last element - <code>clear</code>: clear content - for a more
-detailed list see <a href="https://cplusplus.com/reference/vector/vector/" class="external-link">here</a></int></p>
+<p><code>std::vector</code>: vector from standard library</p>
+<ul>
+<li>The type is specified using the basic C++ types,
+i.e. std::vector<int> is a vector of integers</int>
+</li>
+<li>
+<code>std::vector</code> has a number of member functions that can
+be used to operate on the vector
+<ul>
+<li>
+<code>begin</code>: return iterator to beginning</li>
+<li>
+<code>end</code>: return iterator to end</li>
+<li>
+<code>size</code>: returns vector size</li>
+<li>
+<code>resize</code>: changes the vector size</li>
+<li>
+<code>[]</code>: access element</li>
+<li>
+<code>front</code>: access first element</li>
+<li>
+<code>back</code>: access last element</li>
+<li>
+<code>push_back</code>: append element to end</li>
+<li>
+<code>pop_back</code>: delete last element</li>
+<li>
+<code>clear</code>: clear content</li>
+<li>for a more detailed list see <a href="https://cplusplus.com/reference/vector/vector/" class="external-link">here</a>
+</li>
+</ul>
+</li>
+</ul>
 <p>The following program initializes a vector, resizes it, adds
 elements, and returns the vector:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
@@ -240,8 +274,8 @@ elements, and returns the vector:</p>
 <h2 id="constants">Constants<a class="anchor" aria-label="anchor" href="#constants"></a>
 </h2>
 <p>If you don’t want a value to change throughout the program, you can
-use a constant</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> minutesPerHour <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+assign constant</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> MinutesPerHour <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> pi <span class="op">=</span> <span class="fl">3.14159</span><span class="op">;</span></span></code></pre></div>
 </div>
   </div>

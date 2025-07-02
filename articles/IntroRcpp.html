@@ -166,7 +166,7 @@ function runs A LOT</li>
 <span><span class="co"># add works like a regular R function</span></span>
 <span><span class="va">add</span></span></code></pre></div>
 <pre><code><span><span class="co">## function (x, y, z) </span></span>
-<span><span class="co">## .Call(&lt;pointer: 0x7f307ce9c530&gt;, x, y, z)</span></span></code></pre>
+<span><span class="co">## .Call(&lt;pointer: 0x7f452ac9d530&gt;, x, y, z)</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
@@ -236,9 +236,9 @@ implemented in <code>Rcpp</code>
 <span>  <span class="fu">meanC</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Unit: microseconds</span></span>
-<span><span class="co">##      expr     min       lq     mean  median       uq       max neval</span></span>
-<span><span class="co">##   mean(x) 413.881 416.0205 421.6271 418.871 425.0225   502.376   100</span></span>
-<span><span class="co">##  meanC(x) 372.013 372.5495 478.9923 373.431 381.7965 10601.221   100</span></span></code></pre>
+<span><span class="co">##      expr     min       lq     mean   median      uq      max neval</span></span>
+<span><span class="co">##   mean(x) 414.402 416.5665 422.2386 418.8805 425.473   514.52   100</span></span>
+<span><span class="co">##  meanC(x) 371.773 372.2945 476.7148 372.8900 381.356 10431.70   100</span></span></code></pre>
 <ul>
 <li>
 <code>sourceCpp</code> compiles the file</li>
@@ -253,16 +253,22 @@ implemented in <code>Rcpp</code>
 <h3 id="rcpp-types">Rcpp Types<a class="anchor" aria-label="anchor" href="#rcpp-types"></a>
 </h3>
 <ul>
-<li>Scalar classes</li>
+<li>Scalar classes
+<ul>
 <li><code>int</code></li>
 <li><code>double</code></li>
 <li><code>bool</code></li>
 <li><code>String</code></li>
-<li>vector classes</li>
+</ul>
+</li>
+<li>Vector classes
+<ul>
 <li><code>IntegerVector</code></li>
 <li><code>NumericVector</code></li>
 <li><code>LogicalVector</code></li>
 <li><code>CharacterVector</code></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section level3">
