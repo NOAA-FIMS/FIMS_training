@@ -52,7 +52,7 @@ int main() {
 - `cout`: prints a messages directly to the screen when the program is run
 
 If a function is not expected to return a value, then `void` can be used. The above program can be re-written:
-```{Rcpp}
+```{Rcpp eval=FALSE}
 #include <iostream>
 using namespace std;
 
@@ -73,7 +73,7 @@ void main() {
 ## Simple Addition Program
 
 The following program takes two integers as inputs and return an integer output:
-```{Rcpp}
+```{Rcpp eval=FALSE}
 int add(int x, int y) {
   x = 1;
   x = 2;
@@ -82,7 +82,7 @@ int add(int x, int y) {
 ```
 
 The above program will fail if inputs are decimals. An additional program is needed to handle the different data type. The following will return a floating point output:
-```{Rcpp}
+```{Rcpp eval=FALSE}
 double add(double x, double y) {
   x = 1.2;
   x = 2.4;
@@ -107,7 +107,7 @@ double add(double x, double y) {
     - for a more detailed list see [here](https://cplusplus.com/reference/vector/vector/)
 
 The following program initializes a vector, resizes it, adds elements, and returns the vector:
-```{Rcpp}
+```{Rcpp eval=FALSE}
 #include <iostream>
 
 std::vector<double> create_vector() {
@@ -127,7 +127,7 @@ The above program returns the following vector of four: `1.3 2.6 3.9 8.1`
 ## Constants
 
 If you don't want a value to change throughout the program, you can use a constant
-```{Rcpp}
+```{Rcpp eval=FALSE}
 const int minutesPerHour = 60;
 const double pi = 3.14159;
 ```

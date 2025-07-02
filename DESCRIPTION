@@ -1,11 +1,11 @@
-Package: pkgdownTemplate
-Title: pkgdown Template Package
+Package: FIMS_Training
+Title: FIMS Training
 Date: 2021-07-04
 Version: 1.0
-Authors@R: c(person("Elizabeth", "Holmes", , "eli.holmes@noaa.gov", role = c("aut", "cre")), person("Bai", "Li", role="aut"), person("Christine", "Stawitz", role="aut"))
-URL: https://nmfs-fish-tools.github.io/pkgdownTemplate, https://github.com/nmfs-fish-tools/pkgdownTemplate
-BugReports: https://github.com/nmfs-fish-tools/pkgdownTemplate/issues
-Description: This is a template package for a NMFS branded R package with a pkgdown website.
+Authors@R: c(person("Andrea", "Havron", , "andrea.havron@noaa.gov", role = c("aut", "cre")), person("Christine", "Stawitz", role="aut"))
+URL: https://noaa-fims.github.io/FIMS_training/, https://github.com/NOAA-FIMS/FIMS_training
+BugReports: https://github.com/NOAA-FIMS/FIMS_training/issues
+Description: This is a collection of vignettes that provide need to know C++ to read and develop FIMS.
 Depends: R (>= 4.0.0)
 Imports: Rcpp
 Suggests: 
