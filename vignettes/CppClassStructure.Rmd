@@ -32,8 +32,8 @@ class MyClass{
 - An instance of the class needs to be created for memory allocation (new object created)
 - **new** is the C++ initialize function that allocates memory (creates pointer)
 - Classes can also be initialized as a declaration, i.e. `MyClass m()`
-- Once the class is instantiated, members can be accessed using
 - FIMS uses shared pointers to initialize classes
+- Once the class is instantiated, members can be accessed using
     - the dot(**.**) when class is declared
     - the pointer(**->**) when an instance of the class is created using **new** or is a shared pointer
 
@@ -90,7 +90,7 @@ my_class_add()
 ```
   
 
-resources:
+resources: <br>
 [**geeksforgeeks**](https://www.geeksforgeeks.org/c-classes-and-objects/)<br>
-[**cplusplus**](https://cplusplus.com/doc/tutorial/classes/)]
+[**cplusplus**](https://cplusplus.com/doc/tutorial/classes/)
 
