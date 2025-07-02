@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Basic Program
 
-```{Rcpp}
+```{Rcpp eval=FALSE}
 #include <iostream>
 using namespace std;
 
