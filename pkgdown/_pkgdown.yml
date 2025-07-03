@@ -32,7 +32,9 @@ navbar:
         href: articles/IntroRcpp.html
       - text: C++ Memory Management
         href: articles/CppMemory.html
-      - text: C++ Class Structure
-        href: articles/CppClassStructure
       - text: Templated C++
         href: articles/TemplatedCpp
+      - text: C++ Class Structure
+        href: articles/CppClassStructure
+      - text: C++ Inheritance
+        href: articles/CppInheritance

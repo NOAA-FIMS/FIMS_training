@@ -1,0 +1,94 @@
+---
+title: "Cpp Inheritance"
+author: "Andrea Havron"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## C++ Inheritence
+
+- When a new class (child, derived) inherits members and functions from an existing class (parent, base)
+- There are three different types of inheritence:
+    - **Public**: everything that can access the base class can access its public members and functions
+    - **Protected**: only the derived classes can access the protected members and functions of a base class
+    - **Private**: only the base class can access private members and functions of the base class
+- FIMS only uses Public inhertience so we will focus on those examples
+- **this->** used to reference the base class or local members within the derived class
+
+When setting up inheritance, its best to establish a base class with behavior shared with all the derived classes.
+
+```cpp
+class Shape{
+
+public:
+double length;
+double height;
+
+
+Shape(){}
+
+};
+
+```
+
+Then derived classes can inherit from the base class
+
+```cpp
+class Rectangle : public Shape{
+public:  
+  Rectangle() : Shape() {}
+
+  public:
+  //this->length: points to length within base class, etc.
+  double area(){
+    return this->length * this->height;
+  }
+};
+  
+class Triangle : public Shape{
+public:
+  Triangle() : Shape() {}
+  
+  public:
+  double area(){
+    return 0.5 * this->length * this->height;
+  } 
+};
+```
+
+The Rcpp function can then calculate the areas of the different shapes:
+```cpp
+// [[Rcpp::export]]
+double calculate_areas(std::string shape, double length, double height){
+  
+  double out = 0;
+  
+  if(shape == "rectangle"){
+      Rectangle rect;
+      rect.length = length;
+      rect.height = height;
+      out = rect.area();
+  } else if (shape == "triangle") {
+      Triangle tri;
+      tri.length = length;
+      tri.height = height;
+      out = tri.area();
+  } else {
+      Rcpp::Rcout << "Invalid shape" << std::endl;
+  }
+  return out;
+}
+```
+
+All the code is combined into `my_inheritance.cpp` in the `src` directory and can be run from r using `Rcpp::sourceCpp`
+```{r run-inheritance}
+Rcpp::sourceCpp("../src/my_inheritance.cpp")
+
+calculate_areas("triangle", 6, 4)
+calculate_areas("square", 2, 2)
+```
+
+
