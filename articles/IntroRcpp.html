@@ -64,10 +64,13 @@
       <a href="../articles/CppMemory.html">C++ Memory Management</a>
     </li>
     <li>
+      <a href="../articles/TemplatedCpp">Templated C++</a>
+    </li>
+    <li>
       <a href="../articles/CppClassStructure">C++ Class Structure</a>
     </li>
     <li>
-      <a href="../articles/TemplatedCpp">Templated C++</a>
+      <a href="../articles/CppInheritance">C++ Inheritance</a>
     </li>
   </ul>
 </li>
@@ -172,7 +175,7 @@ function runs A LOT</li>
 <span><span class="co"># add works like a regular R function</span></span>
 <span><span class="va">add</span></span></code></pre></div>
 <pre><code><span><span class="co">## function (x, y, z) </span></span>
-<span><span class="co">## .Call(&lt;pointer: 0x7fcbe529d530&gt;, x, y, z)</span></span></code></pre>
+<span><span class="co">## .Call(&lt;pointer: 0x7fd174a9b530&gt;, x, y, z)</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
@@ -242,9 +245,9 @@ implemented in <code>Rcpp</code>
 <span>  <span class="fu">meanC</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Unit: microseconds</span></span>
-<span><span class="co">##      expr     min       lq     mean   median      uq       max neval</span></span>
-<span><span class="co">##   mean(x) 414.714 415.9465 421.3515 418.0545 424.963   526.423   100</span></span>
-<span><span class="co">##  meanC(x) 371.905 372.2200 481.0100 372.6255 381.321 10864.564   100</span></span></code></pre>
+<span><span class="co">##      expr     min       lq     mean  median      uq       max neval</span></span>
+<span><span class="co">##   mean(x) 414.193 416.0415 421.4565 417.770 424.888   506.255   100</span></span>
+<span><span class="co">##  meanC(x) 371.513 372.0395 482.2166 372.425 381.026 10998.444   100</span></span></code></pre>
 <ul>
 <li>
 <code>sourceCpp</code> compiles the file</li>
