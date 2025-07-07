@@ -5,10 +5,11 @@ articles:
   CppClassStructure: CppClassStructure.html
   CppInheritance: CppInheritance.html
   CppMemory: CppMemory.html
+  CppPolymorphism: CppPolymorphism.html
   GettingToKnowCpp: GettingToKnowCpp.html
   IntroRcpp: IntroRcpp.html
   TemplatedCpp: TemplatedCpp.html
-last_built: 2025-07-07T16:41Z
+last_built: 2025-07-07T21:06Z
 urls:
   reference: https://NOAA-FIMS.github.io/FIMS_training/reference
   article: https://NOAA-FIMS.github.io/FIMS_training/articles
