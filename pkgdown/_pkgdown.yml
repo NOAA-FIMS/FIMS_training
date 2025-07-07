@@ -38,3 +38,5 @@ navbar:
         href: articles/CppClassStructure
       - text: C++ Inheritance
         href: articles/CppInheritance
+      - text: C++ Polymorphism
+        href: articles/CppPolymorphism

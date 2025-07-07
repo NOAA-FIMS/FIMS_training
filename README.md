@@ -7,3 +7,4 @@ A repository for FIMS training materials
 - [Templated C++](https://noaa-fims.github.io/FIMS_training/articles/TemplatedCpp.html)
 - [C++ Class Structure](https://noaa-fims.github.io/FIMS_training/articles/CppClassStructure.html)
 - [C++ Inheritance](https://noaa-fims.github.io/FIMS_training/articles/CppInheritance.html)
+- [C++ Polymorphism](https://noaa-fims.github.io/FIMS_training/articles/CppPolymorphism.html)
