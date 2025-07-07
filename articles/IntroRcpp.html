@@ -72,6 +72,9 @@
     <li>
       <a href="../articles/CppInheritance">C++ Inheritance</a>
     </li>
+    <li>
+      <a href="../articles/CppPolymorphism">C++ Polymorphism</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -175,7 +178,7 @@ function runs A LOT</li>
 <span><span class="co"># add works like a regular R function</span></span>
 <span><span class="va">add</span></span></code></pre></div>
 <pre><code><span><span class="co">## function (x, y, z) </span></span>
-<span><span class="co">## .Call(&lt;pointer: 0x7fc4cd89b530&gt;, x, y, z)</span></span></code></pre>
+<span><span class="co">## .Call(&lt;pointer: 0x7f518849c530&gt;, x, y, z)</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
@@ -245,9 +248,9 @@ implemented in <code>Rcpp</code>
 <span>  <span class="fu">meanC</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Unit: microseconds</span></span>
-<span><span class="co">##      expr     min       lq     mean   median       uq       max neval</span></span>
-<span><span class="co">##   mean(x) 414.292 416.4415 422.6744 419.0715 426.2695   537.372   100</span></span>
-<span><span class="co">##  meanC(x) 372.164 372.7900 486.3543 373.3460 382.2780 11329.574   100</span></span></code></pre>
+<span><span class="co">##      expr     min      lq     mean   median       uq       max neval</span></span>
+<span><span class="co">##   mean(x) 414.393 415.911 421.2765 418.2155 425.2180   514.911   100</span></span>
+<span><span class="co">##  meanC(x) 371.994 372.375 483.5460 373.1510 381.9425 11040.393   100</span></span></code></pre>
 <ul>
 <li>
 <code>sourceCpp</code> compiles the file</li>

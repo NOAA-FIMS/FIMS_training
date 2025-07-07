@@ -72,6 +72,9 @@
     <li>
       <a href="../articles/CppInheritance">C++ Inheritance</a>
     </li>
+    <li>
+      <a href="../articles/CppPolymorphism">C++ Polymorphism</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -136,61 +139,84 @@ results based on the derived class</li>
 runtime</li>
 </ul>
 <p>Set up base class as before. This time, the shared object is the
-function, <code>area()</code>.</p>
+function, <code>area()</code>. Note that the area function is proceeded
+by <strong>virtual</strong> and set to equal 0. This is done to specify
+this is a function being overwritten by functions from the child
+class.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">class</span> Shape <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="co">//constructor</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  Shape<span class="op">()</span> <span class="op">{}</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="co">//destructor</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="op">~</span>Shape<span class="op">()</span> <span class="op">{}</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  </span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="co">// Virtual function to calculate area</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> area<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.0</span><span class="op">;</span> </span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="co">//constructor</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    Shape<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="op">~</span>Shape<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="co">// Virtual function to calculate area</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">double</span> area<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="op">};</span></span></code></pre></div>
+<p>The child classes are then specified. Again, we use
+<strong>virtual</strong> to indicate this function is overwriting the
+function in the base class.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">class</span> Circle <span class="op">:</span> <span class="kw">public</span> Shape <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="dt">double</span> radius<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  Circle<span class="op">(</span><span class="dt">double</span> r<span class="op">)</span> <span class="op">:</span> Shape<span class="op">(){</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    radius <span class="op">=</span> r<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="co">// Override area() for Circle</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="dt">double</span> area<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    <span class="cf">return</span> M_PI <span class="op">*</span> radius <span class="op">*</span> radius<span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="kw">class</span> Rectangle <span class="op">:</span> <span class="kw">public</span> Shape <span class="op">{</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="dt">double</span> length<span class="op">,</span> height<span class="op">;</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>  Rectangle<span class="op">(</span><span class="dt">double</span> l<span class="op">,</span> <span class="dt">double</span> h<span class="op">):</span>Shape<span class="op">(){</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  width <span class="op">=</span> l<span class="op">;</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  height <span class="op">=</span> h<span class="op">;</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="co">// Override area() for Rectangle</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>  <span class="dt">double</span> area<span class="op">()</span>  <span class="op">{</span></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>    <span class="cf">return</span> length <span class="op">*</span> height<span class="op">;</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Now when we call calculate_areas, it returns the correct value:</p>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="dt">double</span> radius<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    Circle<span class="op">(</span><span class="dt">double</span> r<span class="op">)</span> <span class="op">:</span> Shape<span class="op">(){</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      radius <span class="op">=</span> r<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="co">// Override area() for Circle</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> area<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    <span class="cf">return</span> M_PI <span class="op">*</span> radius <span class="op">*</span> radius<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="kw">class</span> Rectangle <span class="op">:</span> <span class="kw">public</span> Shape <span class="op">{</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    <span class="dt">double</span> length<span class="op">,</span> height<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  </span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>    Rectangle<span class="op">(</span><span class="dt">double</span> l<span class="op">,</span> <span class="dt">double</span> h<span class="op">)</span> <span class="op">:</span> Shape<span class="op">(){</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>      length <span class="op">=</span> l<span class="op">;</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>      height <span class="op">=</span> h<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  </span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  <span class="co">// Override area() for Rectangle</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> area<span class="op">()</span>  <span class="op">{</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    <span class="cf">return</span> length <span class="op">*</span> height<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>We are going to expose these functions to R using Rcpp Modules. See
+<a href="https://noaa-fims.github.io/FIMS_training/articles/IntroRcpp.html#rcpp-modules" class="external-link">Intro
+to Rcpp</a> for a refresher on Rcpp Modules.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>RCPP_MODULE<span class="op">(</span>shape<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="va">class_</span><span class="op">&lt;</span>Circle<span class="op">&gt;(</span><span class="st">"Circle"</span><span class="op">)</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="op">.</span>constructor<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;()</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="op">.</span>method<span class="op">(</span><span class="st">"area"</span><span class="op">,</span> <span class="op">&amp;</span>Cirlce<span class="op">::</span>area<span class="op">);</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="va">class_</span><span class="op">&lt;</span>Rectangle<span class="op">&gt;(</span><span class="st">"Rectangle"</span><span class="op">)</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="op">.</span>constructor<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dt">double</span><span class="op">&gt;()</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  <span class="op">.</span>method<span class="op">(</span><span class="st">"area"</span><span class="op">,</span> <span class="op">&amp;</span>Rectangle<span class="op">::</span>area<span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  Rcpp<span class="op">::</span><span class="va">class_</span><span class="op">&lt;</span>Shape<span class="op">&gt;(</span><span class="st">"Shape"</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="op">.</span>method<span class="op">(</span><span class="st">"area"</span><span class="op">,</span> <span class="op">&amp;</span>Shape<span class="op">::</span>area<span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  </span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  Rcpp<span class="op">::</span><span class="va">class_</span><span class="op">&lt;</span>Circle<span class="op">&gt;(</span><span class="st">"Circle"</span><span class="op">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="op">.</span>derives<span class="op">&lt;</span>Shape<span class="op">&gt;(</span><span class="st">"Shape"</span><span class="op">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    <span class="op">.</span>constructor<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;();</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  Rcpp<span class="op">::</span><span class="va">class_</span><span class="op">&lt;</span>Rectangle<span class="op">&gt;(</span><span class="st">"Rectangle"</span><span class="op">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>    <span class="op">.</span>derives<span class="op">&lt;</span>Shape<span class="op">&gt;(</span><span class="st">"Shape"</span><span class="op">)</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    <span class="op">.</span>constructor<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dt">double</span><span class="op">&gt;();</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Now we can load the module using <code><a href="https://rdrr.io/pkg/Rcpp/man/loadModule.html" class="external-link">Rcpp::loadModule()</a></code>
+where the second argument is <code>TRUE</code> so that all objects are
+loaded into the R environment. The ‘new’ functions creates a new
+instance of the class.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"../src/my_polymorphism.cpp"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org" class="external-link">Rcpp</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"../src/my_polymorphism.cpp"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/loadModule.html" class="external-link">loadModule</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="va">Circle</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="va">Rectangle</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">c</span><span class="op">$</span><span class="fu">area</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 12.56637</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r</span><span class="op">$</span><span class="fu">area</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 12</span></span></code></pre>
 </div>
   </div>
 
