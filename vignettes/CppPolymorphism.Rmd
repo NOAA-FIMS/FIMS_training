@@ -17,72 +17,80 @@ In the [C++ Inheritance](https://noaa-fims.github.io/FIMS_training/articles/CppI
  - the result is a single action or function that produces different results based on the derived class
  - **virtual**: C++ function that gets overridden at runtime
  
-Set up base class as before. This time, the shared object is the function, `area()`.
+Set up base class as before. This time, the shared object is the function, `area()`. Note that the area function is proceeded by **virtual** and set to equal 0. This is done to specify this is a function being overwritten by functions from the child class.
 ```cpp
 class Shape {
-public:
-  //constructor
-  Shape() {}
-  //destructor
-  virtual ~Shape() {}
-  
-  // Virtual function to calculate area
-  virtual double area() {
-    return 0.0; 
-  }
-};
+  public:
+    //constructor
+    Shape() {}
+    
+    virtual ~Shape() {}
+    
+    // Virtual function to calculate area
+    virtual double area() = 0;
+    
+  };
 ```
 
+The child classes are then specified. Again, we use **virtual** to indicate this function is overwriting the function in the base class.
 ```cpp
 class Circle : public Shape {
-private:
   double radius;
-
-public:
-  Circle(double r) : Shape(){
-    radius = r;
-  }
-
+  
+  public:
+    Circle(double r) : Shape(){
+      radius = r;
+    }
+  
   // Override area() for Circle
-  double area() {
+  virtual double area() {
     return M_PI * radius * radius;
   }
 };
 
 class Rectangle : public Shape {
-private:
-  double length, height;
-
-public:
-  Rectangle(double l, double h):Shape(){
-  width = l;
-  height = h;
-}
-
+  private:
+    double length, height;
+  
+  public:
+    Rectangle(double l, double h) : Shape(){
+      length = l;
+      height = h;
+    }
+  
   // Override area() for Rectangle
-  double area()  {
+  virtual double area()  {
     return length * height;
   }
 };
 ```
-
-
-
-Now when we call calculate_areas, it returns the correct value:
+We are going to expose these functions to R using Rcpp Modules. See [Intro to Rcpp](https://noaa-fims.github.io/FIMS_training/articles/IntroRcpp.html#rcpp-modules) for a refresher on Rcpp Modules.
 
 ```cpp
 RCPP_MODULE(shape) {
-  class_<Circle>("Circle")
-  .constructor<double>()
-  .method("area", &Cirlce::area);
+  Rcpp::class_<Shape>("Shape")
+  .method("area", &Shape::area);
   
-  class_<Rectangle>("Rectangle")
-  .constructor<double, double>()
-  .method("area", &Rectangle::area);
+  Rcpp::class_<Circle>("Circle")
+    .derives<Shape>("Shape")
+    .constructor<double>();
+  
+  Rcpp::class_<Rectangle>("Rectangle")
+    .derives<Shape>("Shape")
+    .constructor<double, double>();
 }
 ```
 
+Now we can load the module using `Rcpp::loadModule()` where the second argument is `TRUE` so that all objects are loaded into the R environment. The 'new' functions creates a new instance of the class.
+
 ```{r}
-Rcpp::sourceCpp("../src/my_polymorphism.cpp")
+library(Rcpp)
+sourceCpp("../src/my_polymorphism.cpp")
+loadModule("shape", TRUE)
+c <- new(Circle, 2)
+r <- new(Rectangle, 3, 4)
+
+c$area()
+r$area()
 ```
 

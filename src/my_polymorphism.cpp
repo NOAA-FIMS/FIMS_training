@@ -22,7 +22,7 @@ class Circle : public Shape {
     }
   
   // Override area() for Circle
-  double area() {
+  virtual double area() {
     return M_PI * radius * radius;
   }
 };
