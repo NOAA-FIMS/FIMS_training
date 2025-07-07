@@ -164,47 +164,49 @@ behavior shared with all the derived classes.</p>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  </span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="kw">class</span> Triangle <span class="op">:</span> <span class="kw">public</span> Shape<span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="kw">class</span> Square <span class="op">:</span> <span class="kw">public</span> Shape<span class="op">{</span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  Triangle<span class="op">()</span> <span class="op">:</span> Shape<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  Square<span class="op">()</span> <span class="op">:</span> Shape<span class="op">()</span> <span class="op">{}</span></span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  </span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
 <span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  <span class="dt">double</span> area<span class="op">(){</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="kw">this</span><span class="op">-&gt;</span>length <span class="op">*</span> <span class="kw">this</span><span class="op">-&gt;</span>height<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">-&gt;</span>length <span class="op">*</span> <span class="kw">this</span><span class="op">-&gt;</span>length<span class="op">;</span></span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="op">}</span> </span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>The Rcpp function can then calculate the areas of the different
 shapes:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">double</span> calculate_areas<span class="op">(</span><span class="bu">std::</span>string shape<span class="op">,</span> <span class="dt">double</span> length<span class="op">,</span> <span class="dt">double</span> height<span class="op">){</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">double</span> calculate_areas<span class="op">(</span><span class="bu">std::</span>string shape<span class="op">,</span> <span class="dt">double</span> length<span class="op">,</span> <span class="dt">double</span> width <span class="op">=</span> <span class="dv">0</span><span class="op">){</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  </span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="dt">double</span> out <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  </span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>shape <span class="op">==</span> <span class="st">"rectangle"</span><span class="op">){</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>      Rectangle rect<span class="op">;</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      rect<span class="op">.</span>length <span class="op">=</span> length<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>      rect<span class="op">.</span>height <span class="op">=</span> height<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>      rect<span class="op">.</span>width <span class="op">=</span> width<span class="op">;</span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      out <span class="op">=</span> rect<span class="op">.</span>area<span class="op">();</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>shape <span class="op">==</span> <span class="st">"triangle"</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      Triangle tri<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>      tri<span class="op">.</span>length <span class="op">=</span> length<span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>      tri<span class="op">.</span>height <span class="op">=</span> height<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>      out <span class="op">=</span> tri<span class="op">.</span>area<span class="op">();</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>      Rcpp<span class="op">::</span>Rcout <span class="op">&lt;&lt;</span> <span class="st">"Invalid shape"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="cf">return</span> out<span class="op">;</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>shape <span class="op">==</span> <span class="st">"square"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      Square sq<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>      sq<span class="op">.</span>length <span class="op">=</span> length<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>      out <span class="op">=</span> sq<span class="op">.</span>area<span class="op">();</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>      Rcpp<span class="op">::</span>Rcout <span class="op">&lt;&lt;</span> <span class="st">"Invalid shape"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="cf">return</span> out<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>All the code is combined into <code>my_inheritance.cpp</code> in the
 <code>src</code> directory and can be run from r using
 <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp</a></code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"../src/my_inheritance.cpp"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">calculate_areas</span><span class="op">(</span><span class="st">"triangle"</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 12</span></span></code></pre>
+<span><span class="fu">calculate_areas</span><span class="op">(</span><span class="st">"rectangle"</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 24</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">calculate_areas</span><span class="op">(</span><span class="st">"square"</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">calculate_areas</span><span class="op">(</span><span class="st">"square"</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 4</span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">calculate_areas</span><span class="op">(</span><span class="st">"triangle"</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Invalid shape</span></span></code></pre>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
