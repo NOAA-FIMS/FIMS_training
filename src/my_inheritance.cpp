@@ -1,12 +1,12 @@
 #include <Rcpp.h> // provides access to Rcpp library
 #include <iostream> // provides access to std library
-#include <string> // provides access to string library
+#include <string> // provides access to ssqng library
 
 class Shape{
 
 public:
 double length;
-double height;
+double width;
 
 
 Shape(){}
@@ -20,35 +20,34 @@ public:
   public:
   //this->length: points to length within base class, etc.
   double area(){
-    return this->length * this->height;
+    return this->length * this->width;
   }
 };
   
-class Triangle : public Shape{
+class Square : public Shape{
 public:
-  Triangle() : Shape() {}
+  Square() : Shape() {}
   
   public:
   double area(){
-    return 0.5 * this->length * this->height;
+    return this->length * this->length;
   } 
 };
 
 // [[Rcpp::export]]
-double calculate_areas(std::string shape, double length, double height){
+double calculate_areas(std::string shape, double length, double width = 0){
   
   double out = 0;
   
   if(shape == "rectangle"){
       Rectangle rect;
       rect.length = length;
-      rect.height = height;
+      rect.width = width;
       out = rect.area();
-  } else if (shape == "triangle") {
-      Triangle tri;
-      tri.length = length;
-      tri.height = height;
-      out = tri.area();
+  } else if (shape == "square") {
+      Square sq;
+      sq.length = length;
+      out = sq.area();
   } else {
       Rcpp::Rcout << "Invalid shape" << std::endl;
   }

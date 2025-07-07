@@ -48,13 +48,13 @@ public:
   }
 };
   
-class Triangle : public Shape{
+class Square : public Shape{
 public:
-  Triangle() : Shape() {}
+  Square() : Shape() {}
   
   public:
   double area(){
-    return 0.5 * this->length * this->height;
+    return this->length * this->length;
   } 
 };
 ```
@@ -62,20 +62,19 @@ public:
 The Rcpp function can then calculate the areas of the different shapes:
 ```cpp
 // [[Rcpp::export]]
-double calculate_areas(std::string shape, double length, double height){
+double calculate_areas(std::string shape, double length, double width = 0){
   
   double out = 0;
   
   if(shape == "rectangle"){
       Rectangle rect;
       rect.length = length;
-      rect.height = height;
+      rect.width = width;
       out = rect.area();
-  } else if (shape == "triangle") {
-      Triangle tri;
-      tri.length = length;
-      tri.height = height;
-      out = tri.area();
+  } else if (shape == "square") {
+      Square sq;
+      sq.length = length;
+      out = sq.area();
   } else {
       Rcpp::Rcout << "Invalid shape" << std::endl;
   }
@@ -87,8 +86,9 @@ All the code is combined into `my_inheritance.cpp` in the `src` directory and ca
 ```{r run-inheritance}
 Rcpp::sourceCpp("../src/my_inheritance.cpp")
 
-calculate_areas("triangle", 6, 4)
-calculate_areas("square", 2, 2)
+calculate_areas("rectangle", 6, 4)
+calculate_areas("square", 2)
+calculate_areas("triangle", 3, 4)
 ```
 
 
