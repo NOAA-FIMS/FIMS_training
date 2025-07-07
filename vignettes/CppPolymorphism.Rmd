@@ -1,0 +1,88 @@
+---
+title: "Cpp Polymorphism"
+author: "Andrea Havron"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In the [C++ Inheritance](https://noaa-fims.github.io/FIMS_training/articles/CppInheritance.html) example, we saw how derived classes can inherit from base classes. This example resulted in code that required `if()` statements to calculate a function for the different classes. Polymorphism can be used instead to specify different behaviors for the different classes to avoid conditional statements in the code, which are hard to maintain and extend. 
+
+## C++ Polymorphism
+
+ - a function or operator works different when used in different context
+ - can implement when classes inherit from each other
+ - the result is a single action or function that produces different results based on the derived class
+ - **virtual**: C++ function that gets overridden at runtime
+ 
+Set up base class as before. This time, the shared object is the function, `area()`.
+```cpp
+class Shape {
+public:
+  //constructor
+  Shape() {}
+  //destructor
+  virtual ~Shape() {}
+  
+  // Virtual function to calculate area
+  virtual double area() {
+    return 0.0; 
+  }
+};
+```
+
+```cpp
+class Circle : public Shape {
+private:
+  double radius;
+
+public:
+  Circle(double r) : Shape(){
+    radius = r;
+  }
+
+  // Override area() for Circle
+  double area() {
+    return M_PI * radius * radius;
+  }
+};
+
+class Rectangle : public Shape {
+private:
+  double length, height;
+
+public:
+  Rectangle(double l, double h):Shape(){
+  width = l;
+  height = h;
+}
+
+  // Override area() for Rectangle
+  double area()  {
+    return length * height;
+  }
+};
+```
+
+
+
+Now when we call calculate_areas, it returns the correct value:
+
+```cpp
+RCPP_MODULE(shape) {
+  class_<Circle>("Circle")
+  .constructor<double>()
+  .method("area", &Cirlce::area);
+  
+  class_<Rectangle>("Rectangle")
+  .constructor<double, double>()
+  .method("area", &Rectangle::area);
+}
+```
+
+```{r}
+Rcpp::sourceCpp("../src/my_polymorphism.cpp")
+```
+
